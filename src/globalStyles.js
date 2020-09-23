@@ -38,6 +38,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: var(--primary-font);
   }
+
+  button{
+    color:white;
+    &:focus{
+      outline:none;
+    }
+  }
   
  
 `
