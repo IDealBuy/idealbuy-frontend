@@ -11,13 +11,13 @@ const GlobalStyle = createGlobalStyle`
         font-style: normal;
     }
   @font-face {
-        font-family: 'Karla';
+        font-family: 'Karla-Bold';
         src:url(${KarlaBold}) format('ttf');
         font-weight: bold;
         font-style: normal;
     }
   @font-face {
-        font-family: 'Karla';
+        font-family: 'Karla-Italic';
         src:url(${KarlaItalic}) format('ttf');
         font-weight: normal;
         font-style: italic;
@@ -31,12 +31,14 @@ const GlobalStyle = createGlobalStyle`
       --background-color:#F1FAEE;
       --background-color50:#F8FDF7;
       --primary-font:"Karla", sans-serif;
+      --secondary-font: "Karla-Bold", sans-serif;
 
   }
   body {
     margin: 0;
     padding: 0;
     font-family: var(--primary-font);
+    font-size: 16px;
   }
   
  
