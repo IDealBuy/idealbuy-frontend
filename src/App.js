@@ -1,21 +1,38 @@
-import React from 'react'
-import GlobalStyle from './globalStyles'
-import './App.css'
+import React from "react";
+import GlobalStyle from "./globalStyles";
+import "./App.css";
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { ProductsList } from './pages/ProductsList'
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ProductsPage } from "./pages/ProductsPage";
+import { StateProvider } from "./Context";
+import { LoginPage } from "./pages/LoginPage";
 
 function App() {
+  const initialState = {
+    isAuth: localStorage.getItem("isAuth") == null ? false : true,
+  };
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "changeIsAuth":
+        return {
+          ...state,
+          isAuth: action.isAuth,
+        };
+      default:
+        return state;
+    }
+  };
   return (
-    <>
+    <StateProvider initialState={initialState} reducer={reducer}>
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ProductsList}/>
+          <Route exact path="/" component={ProductsPage} />
+          <Route exact path="/login" component={LoginPage} />
         </Switch>
       </BrowserRouter>
-    </>
-  )
+    </StateProvider>
+  );
 }
 
-export default App
+export default App;
