@@ -22,7 +22,7 @@ const Input = styled.input`
 `;
 
 const LabelCheckbox = styled.label`
-    border: 1px solid #AAAAAA;
+    border: 1px solid #e5e5e5;
     width: 280px;
     height: 112px;
     border-radius: 10px;
@@ -31,7 +31,7 @@ const LabelCheckbox = styled.label`
     flex-flow: row;
     justify-content: space-around;
     align-items: center;
-    color: #AAAAAA;
+    color: #e5e5e5;
     padding: 5px;
     box-sizing: border-box;
 `
