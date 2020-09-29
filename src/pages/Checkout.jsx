@@ -1,5 +1,6 @@
 import React from 'react'
 import CheckboxCart from '../components/CheckboxCart'
+import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
 import styled, { css } from 'styled-components'
 
@@ -96,6 +97,10 @@ export const Checkout = () => {
                 <GridAditionalService>
                     <TitleSection>
                         Additional service
+                        <Toggle>
+                            
+
+                        </Toggle>
                     </TitleSection>
                 </GridAditionalService>
                 <GridPayment>
