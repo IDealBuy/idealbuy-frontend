@@ -33,6 +33,11 @@ const GlobalStyle = createGlobalStyle`
       --primary-font:"Karla", sans-serif;
 
   }
+
+  *{
+    box-sizing:border-box;
+
+  }
   body {
     margin: 0;
     padding: 0;
