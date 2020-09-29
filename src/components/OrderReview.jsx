@@ -56,14 +56,22 @@ const OrderButton = styled.button`
     height: 35px;
 `
 
-const OrderSumaryItem = styled.p`
-    
+const RedParagraph = styled.p`
+    color: var(--primary-color);
+    display: inline;
+    font-weight: bold;
 `
 
 const OrderDivider = styled.hr`
     border: 1px solid #e5e5e5;
 `
 
+const OrderTransactionInfo = styled.div`
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 1.5em 0;
+`
 
 const OrderReview = () => {
     return(
@@ -71,7 +79,17 @@ const OrderReview = () => {
             <OrderTitleContainer>
                 <OrderTitle>CUENTA DE INVITADO</OrderTitle>
             </OrderTitleContainer>
+            <OrderTransactionInfo>
+                <div>
+                    No. de transacción
+                </div>
+                <div>
+                    #123432123
+                </div>
+
+            </OrderTransactionInfo>
             <OrderDivider />
+
             <OrderDetailContainer>
                 <OrderDetailContainerChild>
                     <OrderCuponInput placeholder="CUPON" type="text"/>
@@ -80,6 +98,36 @@ const OrderReview = () => {
                     <OrderButton>Aplicar</OrderButton>
                 </OrderDetailContainerChild>
             </OrderDetailContainer>
+            <OrderDivider />
+            <OrderTransactionInfo>
+                <div>
+                    Subtotal
+                </div>
+                <div>
+                    $122
+                </div>
+
+            </OrderTransactionInfo>
+            <OrderTransactionInfo>
+                <div>
+                    Servicios adicionales
+                </div>
+                <div>
+                    <RedParagraph>
+                        10
+                    </RedParagraph>
+                </div>
+
+            </OrderTransactionInfo>
+            <OrderTransactionInfo>
+                <div>
+                    Total
+                </div>
+                <div>
+                    132
+                </div>
+
+            </OrderTransactionInfo>
             <OrderTitleContainer>
                 <OrderTitle>EXPIRA EN: 21 horas, 31 minutos</OrderTitle>
             </OrderTitleContainer>
