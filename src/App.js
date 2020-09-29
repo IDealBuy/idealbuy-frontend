@@ -5,7 +5,7 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ProductsPage } from "./pages/ProductsPage";
 import { StateProvider } from "./Context";
-import { LoginPage } from "./pages/LoginPage";
+import { AccessPage } from "./pages/AccessPage";
 
 function App() {
   const initialState = {
@@ -28,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ProductsPage} />
-          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/login" component={AccessPage} />
         </Switch>
       </BrowserRouter>
     </StateProvider>
