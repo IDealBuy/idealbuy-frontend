@@ -3,10 +3,10 @@ import GlobalStyle from '../globalStyles'
 import styled, { css } from 'styled-components'
 
 const OrderReviewContainer = styled.section`
-    width: 500px;
+    width: 100%;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
-    margin: 1em;
+    margin: 1em 0;
     padding: 1.5em;
     box-sizing: border-box;
 `

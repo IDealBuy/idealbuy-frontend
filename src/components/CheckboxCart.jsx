@@ -8,7 +8,7 @@ import fedexLogo from '../assets/images/fedex_logo.png'
 const CheckboxDeliveryContainer = styled.div`
   text-align: center;
   /*border: 1px solid var(--background-color50);*/
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   flex-flow: row;
   align-items: center;
