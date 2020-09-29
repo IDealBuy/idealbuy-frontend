@@ -12,8 +12,9 @@ const CheckboxDeliveryContainer = styled.div`
   justify-content: center;
   flex-flow: row;
   align-items: center;
-  margin: .5em .5em 1em .5em;
+  margin: .5em .5em 1em 0;
   /* padding: 10px; */
+  box-sizing: border-box;
 `
 
 const Input = styled.input`
@@ -23,10 +24,9 @@ const Input = styled.input`
 
 const LabelCheckbox = styled.label`
     border: 1px solid #e5e5e5;
-    width: 280px;
     height: 112px;
     border-radius: 10px;
-    margin-left: 1em;
+    margin-left: .6em;
     display: flex;
     flex-flow: row;
     justify-content: space-around;
@@ -34,11 +34,12 @@ const LabelCheckbox = styled.label`
     color: #e5e5e5;
     padding: 5px;
     box-sizing: border-box;
+    width: 280px;
 `
 
 const DeliveryImgContainer = styled.div`
     width: 63px;
-    margin: 5px;
+    margin: 2px;
 `
 
 const DeliveryImg = styled.img`
