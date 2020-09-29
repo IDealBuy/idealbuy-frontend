@@ -9,11 +9,11 @@ import {
 } from "../styles/pages/login";
 import logo from "../assets/logotipo.png";
 import shoppingCart from "../assets/shoppingCart.svg";
-import { useStateValue } from "../Context";
+//import { useStateValue } from "../Context";
 
 export const AccessPage = () => {
   const [login, setLogin] = useState(true);
-  const [{ isAuth }, dispatch] = useStateValue();
+  //const [{ isAuth }, dispatch] = useStateValue();
 
   const changeType = () => {
     setLogin(!login);
