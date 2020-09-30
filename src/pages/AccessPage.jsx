@@ -14,9 +14,10 @@ import {
   Separator,
 } from "../styles/pages/login";
 import logo from "../assets/logotipo.png";
+import gmail_logo from "../assets/images/gmail_logo.png";
 import shoppingCart from "../assets/shoppingCart.svg";
 import { Button } from "../components/Buttons";
-import { handleSignUp, handleSignIn } from "../utils/auth";
+import { handleSignUp, handleSignIn, handleGoogleSignIn } from "../utils/auth";
 import { useStateValue } from "../Context";
 
 export const AccessPage = () => {
@@ -30,7 +31,7 @@ export const AccessPage = () => {
   };
 
   const handleLocalStorage = (user) => {
-    console.log(user)
+    console.log(user);
     let userData = {
       email: user.email,
       uid: user.uid,
@@ -43,11 +44,18 @@ export const AccessPage = () => {
     console.log(user.uid);
   };
 
-  const submit = (option, email, password) => {
+  const submit = ({ option, email, password }) => {
     if (option === "login") {
       handleSignIn(email, password).then((resp) => {
         if (resp !== undefined) {
           handleLocalStorage(resp.user);
+          history.push("/");
+        }
+      });
+    } else if (option === "gmail") {
+      handleGoogleSignIn().then((resp) => {
+        if (resp !== undefined) {
+          handleLocalStorage(resp);
           history.push("/");
         }
       });
@@ -73,6 +81,7 @@ export const AccessPage = () => {
     return (
       <LoginContainer>
         <h3>Log In</h3>
+        <OptionsSignIn onSubmit={submit} />
         <label htmlFor="">Email</label>
         <Input
           key="email"
@@ -93,7 +102,7 @@ export const AccessPage = () => {
 
         <Button
           onClick={() => {
-            submit("login", email, password);
+            submit({ option: "login", email, password });
           }}
         >
           Log In
@@ -102,7 +111,6 @@ export const AccessPage = () => {
         <Button secondary={true} onClick={() => changeType(email, password)}>
           Sign Up
         </Button>
-
         <div style={{ height: "50px" }}></div>
       </LoginContainer>
     );
@@ -121,6 +129,8 @@ export const AccessPage = () => {
     return (
       <LoginContainer>
         <h3>Create account</h3>
+        <OptionsSignIn onSubmit={submit} />
+
         <label htmlFor="">Email</label>
         <Input id="email" onChange={handleInput} value={email} type="text" />
         <br />
@@ -133,7 +143,7 @@ export const AccessPage = () => {
         />
         <div style={{ height: "1.5em" }}></div>
 
-        <Button onClick={() => submit("signup", email, password)}>
+        <Button onClick={() => submit({ option: "signup", email, password })}>
           Sign Up
         </Button>
         <OrSeparator />
@@ -165,3 +175,15 @@ const OrSeparator = () => (
     <hr />
   </Separator>
 );
+
+const OptionsSignIn = ({ onSubmit }) => {
+  return (
+    <div style={{textAlign:"center"}}>
+      <img
+        onClick={() => onSubmit({ option: "gmail" })}
+        src={gmail_logo}
+        alt="Gmail Log In"
+      />
+    </div>
+  );
+};

@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const Input = styled.input`
   background: #d3edee;
   color: #1d3557;
-  padding: 10px 25px;
+  padding: 8px 25px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 18px;
   :focus {
     outline: none;

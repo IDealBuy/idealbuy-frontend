@@ -45,3 +45,18 @@ export const handleSignIn = async (email, password)  => {
       });
   
 };
+
+export const handleGoogleSignIn = async ( ) =>{
+  var provider = new firebase.auth.GoogleAuthProvider();
+  return await firebase.default.auth().signInWithPopup(provider)
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
