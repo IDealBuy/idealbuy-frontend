@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 
 export const RectButton = styled.button`
   background: var(--primary-color);
@@ -10,8 +10,19 @@ export const RectButton = styled.button`
   padding: 0;
   box-sizing: border-box;
   ${(props) =>
-    props.secondary===true &&
+    props.secondary === true &&
     css`
       background: var(--secondary-color50);
     `}
-`
+`;
+
+export const NormButton = styled.button`
+  background: var(--primary-color);
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  -webkit-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
+  -moz-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
+  box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
+`;

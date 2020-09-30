@@ -9,6 +9,8 @@ import {
 } from "../styles/pages/login";
 import logo from "../assets/logotipo.png";
 import shoppingCart from "../assets/shoppingCart.svg";
+import { Button } from "../components/Buttons";
+import { handleSignUp, handleSignIn } from "../utils/auth";
 //import { useStateValue } from "../Context";
 
 export const AccessPage = () => {
@@ -20,30 +22,65 @@ export const AccessPage = () => {
   };
 
   const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const handleInput = (e) => {
+      if (e.target.id === "email") {
+        setEmail(e.target.value);
+      } else if (e.target.id === "password") setPassword(e.target.value);
+    };
+
     return (
       <LoginContainer>
-        <h3>Login</h3>
+        <h3>Log In</h3>
         <label htmlFor="">Email</label>
-        <Input id="email" type="text" />
+        <Input
+          key="email"
+          id="email"
+          value={email}
+          onChange={handleInput}
+          type="text"
+        />
         <br />
         <label htmlFor="">Password</label>
-        <Input id="password" type="password" />
+        <Input
+          id="password"
+          onChange={handleInput}
+          value={password}
+          type="password"
+        />
         <p onClick={changeType}>New User? Create an account </p>
+        <Button onClick={()=> handleSignIn(email,password)}>Log In</Button>
+
         <div style={{ height: "50px" }}></div>
       </LoginContainer>
     );
   };
 
   const Register = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const handleInput = (e) => {
+      if (e.target.id === "email") {
+        setEmail(e.target.value);
+      } else if (e.target.id === "password") setPassword(e.target.value);
+    };
+
     return (
       <LoginContainer>
         <h3>Create account</h3>
         <label htmlFor="">Email</label>
-        <Input id="email" type="text" />
+        <Input id="email" onChange={handleInput} value={email} type="text" />
         <br />
         <label htmlFor="">Password</label>
-        <Input id="password" type="password" />
+        <Input
+          id="password"
+          onChange={handleInput}
+          value={password}
+          type="password"
+        />
         <p onClick={changeType}>Already an account? Sign In </p>
+        <Button onClick={()=> handleSignUp(email,password)}>Sign Up</Button>
         <div style={{ height: "50px" }}></div>
       </LoginContainer>
     );

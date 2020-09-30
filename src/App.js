@@ -1,5 +1,6 @@
 import React from "react";
 import GlobalStyle from "./globalStyles";
+import firebase from "firebase/app";
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Checkout } from './pages/Checkout'
@@ -25,12 +26,23 @@ function App() {
         return state;
     }
   };
+  var firebaseConfig={
+    apiKey: process.env.REACT_APP_FIREAPIKEY,
+    authDomain: process.env.REACT_APP_FIREAUTHDOMAIN,
+    databaseURL: process.env.REACT_APP_FIREDATABASEURL,
+    projectId: process.env.REACT_APP_FIREPROJECTID,
+    storageBucket: process.env.REACT_APP_FIRESTORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREMESSAGINGSENDERID,
+    appId: process.env.REACT_APP_FIREAPPID,
+    measurementId: process.env.REACT_APP_FIREMEASUREMENTID
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <GlobalStyle />
-      {/* <NavBar></NavBar> */}
       <BrowserRouter>
-      <Sidebar></Sidebar>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductsPage} />
