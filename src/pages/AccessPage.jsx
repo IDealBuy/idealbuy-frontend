@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
+//import { ToastContainer, toast } from "react-toastify";
+//import "react-toastify/dist/ReactToastify.css";
+
 import { Input } from "../styles/components/Forms";
 import {
   Dialog,
@@ -6,19 +11,54 @@ import {
   LoginContainer,
   Section,
   ShoppingCart,
+  Separator,
 } from "../styles/pages/login";
 import logo from "../assets/logotipo.png";
 import shoppingCart from "../assets/shoppingCart.svg";
 import { Button } from "../components/Buttons";
 import { handleSignUp, handleSignIn } from "../utils/auth";
-//import { useStateValue } from "../Context";
+import { useStateValue } from "../Context";
 
 export const AccessPage = () => {
   const [login, setLogin] = useState(true);
-  //const [{ isAuth }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
+  const history = useHistory();
 
   const changeType = () => {
+    console.log(user);
     setLogin(!login);
+  };
+
+  const handleLocalStorage = (user) => {
+    console.log(user)
+    let userData = {
+      email: user.email,
+      uid: user.uid,
+    };
+    localStorage.setItem("userData", JSON.stringify(userData));
+    dispatch({
+      type: "changeCurrentUser",
+      user: userData,
+    });
+    console.log(user.uid);
+  };
+
+  const submit = (option, email, password) => {
+    if (option === "login") {
+      handleSignIn(email, password).then((resp) => {
+        if (resp !== undefined) {
+          handleLocalStorage(resp.user);
+          history.push("/");
+        }
+      });
+    } else {
+      handleSignUp(email, password).then((resp) => {
+        if (resp !== undefined) {
+          handleLocalStorage(resp);
+          history.push("/");
+        }
+      });
+    }
   };
 
   const Login = () => {
@@ -49,8 +89,19 @@ export const AccessPage = () => {
           value={password}
           type="password"
         />
-        <p onClick={changeType}>New User? Create an account </p>
-        <Button onClick={()=> handleSignIn(email,password)}>Log In</Button>
+        <div style={{ height: "1.5em" }}></div>
+
+        <Button
+          onClick={() => {
+            submit("login", email, password);
+          }}
+        >
+          Log In
+        </Button>
+        <OrSeparator />
+        <Button secondary={true} onClick={() => changeType(email, password)}>
+          Sign Up
+        </Button>
 
         <div style={{ height: "50px" }}></div>
       </LoginContainer>
@@ -60,6 +111,7 @@ export const AccessPage = () => {
   const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const handleInput = (e) => {
       if (e.target.id === "email") {
         setEmail(e.target.value);
@@ -79,8 +131,15 @@ export const AccessPage = () => {
           value={password}
           type="password"
         />
-        <p onClick={changeType}>Already an account? Sign In </p>
-        <Button onClick={()=> handleSignUp(email,password)}>Sign Up</Button>
+        <div style={{ height: "1.5em" }}></div>
+
+        <Button onClick={() => submit("signup", email, password)}>
+          Sign Up
+        </Button>
+        <OrSeparator />
+        <Button secondary={true} onClick={() => changeType(email, password)}>
+          Log In
+        </Button>
         <div style={{ height: "50px" }}></div>
       </LoginContainer>
     );
@@ -98,3 +157,11 @@ export const AccessPage = () => {
     </Section>
   );
 };
+
+const OrSeparator = () => (
+  <Separator>
+    <hr />
+    or
+    <hr />
+  </Separator>
+);

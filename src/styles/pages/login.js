@@ -60,6 +60,13 @@ export const Img = styled.img`
   width: 100%;
 `;
 
+export const Separator = styled.div`
+  display:flex;
+  & > hr{
+    width:40% ;
+  }
+`
+
 export const ShoppingCart = styled.img`
   grid-column-start: 6;
   grid-column-end: 11;

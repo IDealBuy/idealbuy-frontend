@@ -25,4 +25,9 @@ export const NormButton = styled.button`
   -webkit-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
   -moz-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
   box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
+  ${(props) =>
+    props.secondary === true &&
+    css`
+      background: var(--secondary-color50);
+    `}
 `;
