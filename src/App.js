@@ -8,6 +8,7 @@ import { ProductsPage } from "./pages/ProductsPage";
 import { StateProvider } from "./Context";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
+import { Sidebar } from "./components/Sidebar";
 
 function App() {
   const initialState = {
@@ -27,8 +28,9 @@ function App() {
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <GlobalStyle />
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <BrowserRouter>
+      <Sidebar></Sidebar>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductsPage} />
