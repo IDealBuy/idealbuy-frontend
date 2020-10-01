@@ -4,7 +4,7 @@ export const Navbar = styled.nav`
   background-color: #1d3557;
   height: 80px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -13,10 +13,38 @@ export const MenuBars = styled(Link)`
   font-size: 2rem;
   background: none;
 `;
-export const NavLogo = styled(Link)`
-  margin-left: 2rem;
-  font-size: 2rem;
+
+export const NavList = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 0 2em;
+`
+
+export const NavItem = styled.li`
+  font-size: 1rem;
   background: none;
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+  padding: 0 1em;
+  & a {
+    color: white;
+    text-decoration: none;
+  }
+  & img {
+    height: 40px;
+  }
+
+  & p {
+    color: white;
+  }
 `;
 
 export const NavMenu = styled.div`

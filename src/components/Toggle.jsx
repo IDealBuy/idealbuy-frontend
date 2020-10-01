@@ -14,23 +14,22 @@ const ToggleContainer = styled.div`
   align-items: center;
 `
 
+const ToggleDescription = styled.div`
+  border: 1px solid red;
+`
+
+const TogglePrice = styled.div`
+  border: 1px solid green;
+`
+
+const Toogle = styled.input`
+  border: 1px solid yelow;
+`
+
 const Toogle = () => {
     return(
         <ToggleContainer>
-          <div className="text">
-            <strong>
-              DoublePacking
-            </strong>
-            <p>
-              Improve your packing
-            </p>
-          </div>
-          <div className="price">
-            $3.00
-          </div>
-          <div className="Toggle_Button">
-            x
-          </div>
+          
         </ToggleContainer>
         
       );
