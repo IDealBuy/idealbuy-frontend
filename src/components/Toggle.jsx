@@ -14,7 +14,9 @@ const ToggleContainer = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding: 1em .5em;
-  width: 300px;
+  width: 100%;
+  min-width: 290px;
+
 `
 
 const ToggleDescription = styled.div`

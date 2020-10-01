@@ -101,6 +101,10 @@ export const Checkout = () => {
                             
 
                         </Toggle>
+                        <Toggle>
+                            
+
+                        </Toggle>
                     </TitleSection>
                 </GridAditionalService>
                 <GridPayment>
