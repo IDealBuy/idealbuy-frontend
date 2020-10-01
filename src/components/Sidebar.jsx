@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
-import { Navbar, MenuBars, NavMenu, NavText, NavMenuItems, NavbarToggle } from "../styles/components/Sidebar";
+import LogoWhite from "../assets/images/logo-white.png"
+import { Navbar, MenuBars, NavLogo, NavMenu, NavText, NavMenuItems, NavbarToggle } from "../styles/components/Sidebar";
 
 export const Sidebar = () => {
     const [sideBarState, setSideBarState] = useState(false);
@@ -13,6 +14,9 @@ export const Sidebar = () => {
         <MenuBars to="#">
           <MdMenu size="32px" style={{color:"white"}} onClick={showSidebar}/>
         </MenuBars>
+        <NavLogo to="/">
+          <img src={LogoWhite} alt="" style={{height:"40px"}} />
+        </NavLogo>
       </Navbar>
       <NavMenu active={sideBarState}>
         <NavMenuItems>

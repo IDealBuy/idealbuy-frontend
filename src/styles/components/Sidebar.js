@@ -13,6 +13,11 @@ export const MenuBars = styled(Link)`
   font-size: 2rem;
   background: none;
 `;
+export const NavLogo = styled(Link)`
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+`;
 
 export const NavMenu = styled.div`
   background-color: #1d3557;
