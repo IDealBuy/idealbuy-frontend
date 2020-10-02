@@ -11,6 +11,7 @@ import { StateProvider } from "./Context";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
 import { Sidebar } from "./components/Sidebar";
+import { RenderPDF } from './pages/OrderPrintPdf'
 
 function App() {
   var firebaseConfig = {
@@ -50,6 +51,7 @@ function App() {
           <Route exact path="/login" component={AccessPage} />
           <Route exact path="/register" render={(props)=><AccessPage {...props} loginPage={false} />} />
           <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/pdf" component={RenderPDF} />
         </Switch>
       </BrowserRouter>
     </StateProvider>
