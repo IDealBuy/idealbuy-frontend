@@ -48,6 +48,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductsPage} />
           <Route exact path="/login" component={AccessPage} />
+          <Route exact path="/register" render={(props)=><AccessPage {...props} loginPage={false} />} />
           <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </BrowserRouter>

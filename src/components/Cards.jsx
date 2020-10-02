@@ -6,16 +6,30 @@ import {
   ContainerData,
   TextCard,
   ContainerButtons,
+  BackgroundPromo, DataPromo
 } from "../styles/components/Cards";
 import { RectangularButton } from "./Buttons";
 
-export const ProductCard = () => {
+export const ProductCard = ({home}) => {
   return (
-    <ContainerProductCard>
-      <ImgProductCard src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80" />
+    <ContainerProductCard home={home}>
+      <ImgProductCard home={home} src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80" />
       <ProductCardData name="Pan Tajado" price="$3000" weight="500g" />
-      <ButtonsProductCard />
+      {
+        home?null:<ButtonsProductCard />
+      }
     </ContainerProductCard>
+  );
+};
+
+export const PromoCard = ({ productName, productPrice }) => {
+  return (
+    <BackgroundPromo image="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80">
+      <DataPromo>
+        <p>{productName}</p>
+        <p>{productPrice}</p>
+      </DataPromo>
+    </BackgroundPromo>
   );
 };
 
