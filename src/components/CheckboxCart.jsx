@@ -1,6 +1,6 @@
 import React from 'react'
-import GlobalStyle from '../globalStyles'
-import { Checkout } from '../pages/Checkout'
+// import GlobalStyle from '../globalStyles'
+// import { Checkout } from '../pages/Checkout'
 import styled, {css} from 'styled-components'
 import fedexLogo from '../assets/images/fedex_logo.png'
 
