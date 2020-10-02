@@ -30,4 +30,9 @@ export const NormButton = styled.button`
     css`
       background: var(--secondary-color50);
     `}
+  ${(props) =>
+    props.mr_2 === true &&
+    css`
+      margin-right:20px;
+    `}
 `;

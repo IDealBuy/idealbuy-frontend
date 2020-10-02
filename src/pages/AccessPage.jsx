@@ -20,8 +20,8 @@ import { Button } from "../components/Buttons";
 import { handleSignUp, handleSignIn, handleGoogleSignIn } from "../utils/auth";
 import { useStateValue } from "../Context";
 
-export const AccessPage = () => {
-  const [login, setLogin] = useState(true);
+export const AccessPage = ({loginPage=true}) => {
+  const [login, setLogin] = useState(loginPage);
   const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
 
