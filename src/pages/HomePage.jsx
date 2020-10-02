@@ -11,6 +11,7 @@ import {
   Highlight,
   Paragraph,
   ButtonsContainer,
+  ImageMobile,
   Wave
 } from "../styles/pages/home";
 
@@ -35,6 +36,8 @@ export const HomePage = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
           </Paragraph>
+        <ImageMobile src={shopping} />
+
           <BestSellers>
             <ProductCard home productName="Huevos" productPrice="$3000" />
             <ProductCard home productName="Huevos" productPrice="$3000" />
