@@ -99,7 +99,6 @@ export const Checkout = () => {
                         Additional service
                         <Toggle>
                             
-
                         </Toggle>
                         <Toggle>
                             

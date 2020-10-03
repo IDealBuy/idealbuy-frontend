@@ -10,6 +10,7 @@ import { ProductsPage } from "./pages/ProductsPage";
 import { StateProvider } from "./Context";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
+import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";
 import { Test } from "./pages/Test";
 // import { Sidebar } from "./components/Sidebar";
@@ -41,27 +42,24 @@ function App() {
 				return state;
 		}
 	};
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/products" component={ProductsPage} />
+          <Route exact path="/login" component={AccessPage} />
+          <Route exact path="/register" render={(props)=><AccessPage {...props} loginPage={false} />} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/PurchaseOptions" component={PurchaseOptions} />
+          <Route exact path="/admin" component={AdminPage} />
+            <Route exact path="/test" component={Test} />
+        </Switch>
+      </BrowserRouter>
+    </StateProvider>
+  );
 
-	return (
-		<StateProvider initialState={initialState} reducer={reducer}>
-			<GlobalStyle />
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={HomePage} />
-					<Route exact path="/products" component={ProductsPage} />
-					<Route exact path="/login" component={AccessPage} />
-					<Route
-						exact
-						path="/register"
-						render={(props) => <AccessPage {...props} loginPage={false} />}
-					/>
-					<Route exact path="/checkout" component={Checkout} />
-					<Route exact path="/admin" component={AdminPage} />
-					<Route exact path="/test" component={Test} />
-				</Switch>
-			</BrowserRouter>
-		</StateProvider>
-	);
 }
 
 export default App;
