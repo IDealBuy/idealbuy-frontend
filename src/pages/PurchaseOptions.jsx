@@ -10,6 +10,9 @@ const LogoContainer = styled.div`
     & img {
         width: 300px;
     }
+    @media screen and (max-width: 768px){
+
+    }
 `
 
 const TitleContainer = styled.div`
@@ -25,12 +28,21 @@ const PurchaseOptionsContainer = styled.div`
     max-width: 1200px;
     & div {
         text-align: center;
+        justify-self: center;
     }
     & div:nth-child(1) {
         grid-column: 2 / span 1;
     }
     & div:nth-child(2) {
         grid-column: 3 / span 1;
+    }
+
+    @media screen and (max-width: 769px){
+        grid-template-columns: 1fr;
+        grid-row-gap: 3em;
+        & div:nth-child(1), div:nth-child(2) {
+                grid-column: auto / span 1;
+            }
     }
 `
 
@@ -44,6 +56,14 @@ const AnotherOptionsContainer = styled(PurchaseOptionsContainer) `
     }
     & div:nth-child(3){
         grid-column: 3 / span 1;
+    }
+
+    @media screen and (max-width: 769px){
+        grid-template-columns: 1fr;
+            & div:nth-child(1), div:nth-child(2),div:nth-child(3),div:nth-child(4) {
+                grid-column: auto / span 1;
+            }
+        }
     }
     
 `
