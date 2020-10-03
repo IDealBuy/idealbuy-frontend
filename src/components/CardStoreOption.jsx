@@ -46,7 +46,7 @@ const Stores = styled.div`
     margin: 1em auto;
     & img {
         margin: .5em;
-        width: 70px; 
+        width: 50px; 
         /* height: auto; */
     }
 `
