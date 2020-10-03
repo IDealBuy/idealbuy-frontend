@@ -22,6 +22,7 @@ export const NormButton = styled.button`
   height: 40px;
   border-radius: 8px;
   border: none;
+  font-weight: bold;
   -webkit-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
   -moz-box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);
   box-shadow: inset 0px -4px 4px 2px rgba(29, 53, 87, 0.15);

@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
         font-style: normal;
     }
   @font-face {
-        font-family: 'Karla';
+        font-family: 'Karla-Bold';
         src:url(${KarlaBold}) format('ttf');
         font-weight: bold;
         font-style: normal;

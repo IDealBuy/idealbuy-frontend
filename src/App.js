@@ -10,6 +10,7 @@ import { ProductsPage } from "./pages/ProductsPage";
 import { StateProvider } from "./Context";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
+import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { Sidebar } from "./components/Sidebar";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route exact path="/login" component={AccessPage} />
           <Route exact path="/register" render={(props)=><AccessPage {...props} loginPage={false} />} />
           <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/PurchaseOptions" component={PurchaseOptions} />
         </Switch>
       </BrowserRouter>
     </StateProvider>
