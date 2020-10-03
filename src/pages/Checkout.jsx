@@ -2,7 +2,7 @@ import React from 'react'
 import CheckboxCart from '../components/CheckboxCart'
 import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const CheckoutGrid = styled.section`
     display: grid;

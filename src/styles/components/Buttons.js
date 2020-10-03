@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-
+import { device } from "../../utils/device";
 export const RectButton = styled.button`
   background: var(--primary-color);
   height: 32px;
@@ -36,4 +36,13 @@ export const NormButton = styled.button`
     css`
       margin-right:20px;
     `}
+  ${(props) =>
+    props.mr_1 === true &&
+    css`
+      margin-right:1em;
+    `}
+    @media ${device.mobileM} {
+      height: 30px;
+
+  }
 `;

@@ -1,6 +1,6 @@
 import React from 'react'
 // import GlobalStyle from '../globalStyles'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 
 const ToggleContainer = styled.div`
   width: 100%;
