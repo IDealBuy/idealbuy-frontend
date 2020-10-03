@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { device } from "../../utils/device";
 export const Input = styled.input`
   background: #d3edee;
   color: #1d3557;
@@ -13,4 +13,9 @@ export const Input = styled.input`
     -moz-box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.4);
   }
+  @media ${device.mobileM} {
+  font-size: 14px;
+  padding: 4px 17px;
+
+
 `;

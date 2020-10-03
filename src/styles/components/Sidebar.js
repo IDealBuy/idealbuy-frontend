@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 export const Navbar = styled.nav`
   background-color: #1d3557;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;

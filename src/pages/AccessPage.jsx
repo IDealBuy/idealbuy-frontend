@@ -55,7 +55,7 @@ export const AccessPage = ({loginPage=true}) => {
     } else if (option === "gmail") {
       handleGoogleSignIn().then((resp) => {
         if (resp !== undefined) {
-          handleLocalStorage(resp);
+          handleLocalStorage(resp.user);
           history.push("/");
         }
       });
