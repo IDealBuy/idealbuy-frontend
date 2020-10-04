@@ -14,6 +14,7 @@ import { HomePage } from "./pages/HomePage";
 import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";
 import { Test } from "./pages/Test";
+import { CartPage } from "./pages/CartPage";
 // import { Sidebar } from "./components/Sidebar";
 
 function App() {
@@ -56,7 +57,8 @@ function App() {
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/PurchaseOptions" component={PurchaseOptions} />
           <Route exact path="/admin" component={AdminPage} />
-            <Route exact path="/test" component={Test} />
+			<Route exact path="/test" component={Test} />
+			<Route exact path="/cart" component={CartPage} />
         </Switch>
       </BrowserRouter>
 	</CartProvider>
