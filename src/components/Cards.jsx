@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import {CartContext} from '../contexts/CartContext';
 import { MdAdd, MdRemove } from "react-icons/md";
+import { RectangularButton } from "./Buttons";
 import {
 	ContainerProductCard,
 	ImgProductCard,
@@ -9,25 +11,36 @@ import {
 	BackgroundPromo,
 	DataPromo,
 } from "../styles/components/Cards";
-import { RectangularButton } from "./Buttons";
 
-const addItem = () => {
-	console.log('add item')
-}
 
-const removeItem = () => {
-	console.log('remove item')
-}
+export const ProductCard = ({home, product}) => {
+	
+	const [cart, setCart] = useContext(CartContext);
+	
+	const addItem = () => {
+		
+		console.log('add item')
+		setCart(curr => [...curr,product])
+	}
+	
+	const removeItem = () => {
+		console.log('remove item')
+	}
+	
+	
 
-export const ProductCard = ({ home, id, name, description, photo }) => {
 	return (
-		<ContainerProductCard key={id}>
+		<ContainerProductCard>
 			<ImgProductCard
 			
-				src={photo}
+				src={product.photo}
 			/>
-			<ProductCardData id={id} name={name} price="$3000" description={description} />
-			{home ? null : <ButtonsProductCard/>}
+			<ProductCardData name={product.name} price="$3000" description={product.description} />
+			{/* {home ? null : <ButtonsProductCard product={product} />} */}
+
+			<button onClick={addItem}>Menos</button> 
+				Text
+			<button onClick={removeItem}>Más</button>
 		</ContainerProductCard>
 	);
 };
@@ -55,16 +68,15 @@ const ProductCardData = ({ name, price, description }) => {
 	);
 };
 
-export const ButtonsProductCard = () => (
-	
+export const ButtonsProductCard = (product) => (
 	
 	<ContainerButtons>
-		<RectangularButton secondary onClick={removeItem}>
+		<RectangularButton secondary >
 			<MdRemove />
 		</RectangularButton>
-		<TextCard>0</TextCard>
-		<RectangularButton onClick={addItem}>
+		<TextCard> 0 </TextCard>
+		<RectangularButton >
 			<MdAdd />
 		</RectangularButton>
-	</ContainerButtons>
+	</ContainerButtons>	
 );

@@ -3,16 +3,19 @@ import { ProductCard } from "../components/Cards";
 import { ProductsContainer, Title } from "../styles/pages/productsPage";
 import { exampleProducts } from '../services/exampleProducts'
 import { CartProvider } from '../contexts/CartContext'
+import { Sidebar } from '../components/Sidebar'
 
 export const ProductsPage = () => {
   return (
     <>
       <CartProvider>
+        <Sidebar>
+        </Sidebar>
         <Title>Category name</Title>
         <ProductsContainer>
           {
-            exampleProducts.map((item, inx, exmProds)=>{
-              return <ProductCard key={item.id} name={item.name} description={item.description} photo={item.photo}></ProductCard>
+            exampleProducts.map((product, inx, exmProds)=>{
+              return <ProductCard product={product} key={product.id}></ProductCard>
             })
           }
           

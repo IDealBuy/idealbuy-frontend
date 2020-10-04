@@ -9,7 +9,8 @@ export const Sidebar = () => {
     const [sideBarState, setSideBarState] = useState(false);
     const showSidebar = () => setSideBarState(!sideBarState);
     
-    const contextValue = useContext(CartContext);
+    const [cart, setCart] = useContext(CartContext);
+
   return (
     <>
       <Navbar>
@@ -29,7 +30,7 @@ export const Sidebar = () => {
             </Link>
           </NavItem>
           <NavItem>
-            <span>Cart: {contextValue}</span>
+            <span>Cart: {cart.length}</span>
           </NavItem>
           
 
