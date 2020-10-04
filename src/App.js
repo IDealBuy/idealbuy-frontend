@@ -8,6 +8,7 @@ import { Checkout } from "./pages/Checkout";
 // import { NavBar } from "./components/NavBar";
 import { ProductsPage } from "./pages/ProductsPage";
 import { StateProvider } from "./Context";
+import { CartProvider } from "./contexts/CartContext";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
 import { PurchaseOptions } from "./pages/PurchaseOptions";
@@ -44,6 +45,7 @@ function App() {
 	};
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
+	<CartProvider>
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
@@ -57,6 +59,7 @@ function App() {
             <Route exact path="/test" component={Test} />
         </Switch>
       </BrowserRouter>
+	</CartProvider>
     </StateProvider>
   );
 

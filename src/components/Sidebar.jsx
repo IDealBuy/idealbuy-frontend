@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {CartContext} from '../contexts/CartContext';
 import { Link } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 import LogoWhite from "../assets/images/logo-white.png"
@@ -7,7 +8,8 @@ import { Navbar, MenuBars, NavList, NavItem, NavMenu, NavText, NavMenuItems, Nav
 export const Sidebar = () => {
     const [sideBarState, setSideBarState] = useState(false);
     const showSidebar = () => setSideBarState(!sideBarState);
-
+    
+    const contextValue = useContext(CartContext);
   return (
     <>
       <Navbar>
@@ -25,6 +27,9 @@ export const Sidebar = () => {
             <Link to="/login">
               <p>Sign Up / Log In</p>
             </Link>
+          </NavItem>
+          <NavItem>
+            <span>Cart: {contextValue}</span>
           </NavItem>
           
 
