@@ -13,7 +13,9 @@ export const RectButton = styled.button`
     props.secondary === true &&
     css`
       background: var(--secondary-color50);
-    `}
+    `
+    
+    }
 `;
 
 export const NormButton = styled.button`

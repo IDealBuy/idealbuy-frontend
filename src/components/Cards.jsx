@@ -32,20 +32,26 @@ export const ProductCard = ({home, product}) => {
 				src={product.photo}
 			/>
 			<ProductCardData name={product.name} price="$3000" description={product.description} />
-			{/* {home ? null : <ButtonsProductCard product={product} />} */}
-			{
-				!isInCart(product) && <button onClick={ () => { addProduct(product) } }>Agregar</button> 
-			}
-			{
-				isInCart(product) && <button onClick={() => { increase(product) }} >Sumar</button> 
-			}
-			{
-				// product.quantity > 1 && <button onClick={() => { decrease(product) } }>Restar</button>
-				isInCart(product) && <button onClick={() => { decrease(product) } }>Restar</button>
-			}
-			
-			<button onClick={() => removeProduct(product)}>Remove</button>
-			
+				{/* {home ? null : <ButtonsProductCard product={product} />} */}
+				<ContainerButtons>
+					<div>
+						{
+							!isInCart(product) && <RectangularButton onClick={ () => { addProduct(product) } }><MdAdd /></RectangularButton> 
+						}
+						{
+							isInCart(product) && <RectangularButton onClick={() => { increase(product) }} ><MdAdd /></RectangularButton> 
+						}
+						{
+							// product.quantity > 1 && <RectangularButton onClick={() => { decrease(product) } }>Restar</RectangularButton>
+							<RectangularButton  secondary onClick={() => { decrease(product) } }><MdRemove /></RectangularButton>
+						}
+					</div>
+				{
+					isInCart(product) ? <RectangularButton  secondary onClick={() => { removeProduct(product) } }>X</RectangularButton> : <RectangularButton  disabled secondary >X</RectangularButton>
+
+				}
+				
+			</ContainerButtons>
 
 		</ContainerProductCard>
 	);
