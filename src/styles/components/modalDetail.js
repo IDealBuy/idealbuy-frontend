@@ -1,15 +1,24 @@
 import styled from "styled-components";
-import vars from "../../utils/vars";
+import { device } from "../../utils/device";
 
 export const ModalContainer = styled.div`
 	display: grid;
 	grid-template-columns: 35% 65%;
 	grid-template-rows: auto;
+
+	/* quitar este padding cuando se implemente en el modal */
 	padding: 20px;
+
+	@media ${device.tablet} {
+		display: block;
+	}
+	@media ${device.mobileM} {
+		display: block;
+	}
 `;
 
 export const ProductDetail = styled.div`
-	background-color: ${vars.backgroundColor};
+	background-color: #f1faee;
 	padding: 40px;
 	h2 {
 		margin: 10px 0;
@@ -21,6 +30,26 @@ export const ProductDetail = styled.div`
 	}
 	p {
 		margin-top: 10px;
+	}
+	@media ${device.tablet} {
+		h4 {
+			font-size: 20px;
+		}
+		p {
+			font-size: 20px;
+		}
+	}
+	@media ${device.mobileM} {
+		h2 {
+			font-size: 32px;
+		}
+		h4 {
+			font-size: 18px;
+		}
+		padding: 3%;
+		p {
+			font-size: 18px;
+		}
 	}
 `;
 
@@ -35,9 +64,12 @@ export const ContainerButtons = styled.div`
 
 export const RelatedItemContainer = styled.div`
 	display: grid;
-	justify-content: center;
+	justify-items: center;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: auto;
+	@media ${device.mobileM} {
+		grid-gap: 5px;
+	}
 `;
 
 export const ItemRelated = styled.div`
@@ -45,6 +77,16 @@ export const ItemRelated = styled.div`
 	height: auto;
 	img {
 		width: 100%;
+	}
+	h4 {
+		text-align: center;
+	}
+	@media ${device.tablet} {
+		width: 150px;
+	}
+
+	@media ${device.mobileM} {
+		width: 100px;
 	}
 `;
 
