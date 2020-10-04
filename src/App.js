@@ -14,6 +14,9 @@ import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";
 import { SupermarketPage } from "./pages/SupermarketPage";
 import { Test } from "./pages/Test";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import { Sidebar } from "./components/Sidebar";
 
 function App() {
@@ -30,7 +33,7 @@ function App() {
 
 	firebase.initializeApp(firebaseConfig);
 	const initialState = {
-		user: localStorage.getItem("user"),
+		user: localStorage.getItem("userData"),
 	};
 	const reducer = (state, action) => {
 		switch (action.type) {
@@ -45,6 +48,7 @@ function App() {
 	};
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
+		<ToastContainer/>
       <GlobalStyle />
       <BrowserRouter>
         <Switch>

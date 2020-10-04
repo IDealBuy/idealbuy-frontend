@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
 // import { Redirect } from "react-router-dom";
-import firebase from "firebase/app";
-import "firebase/storage";
+
 import Modal from "../components/Modal";
 import { Table } from "../components/Table";
-import { Navbar } from "../styles/components/Sidebar";
 import {
   AdminPageContent,
   AdminPageContainer,
@@ -28,6 +26,7 @@ import { Input } from "../styles/components/Forms";
 import { Button } from "../components/Buttons";
 import noimage from "../assets/noimage.jpg";
 import { ToogleLabel, ToggleInput, Slider, ToggleContainer } from "../components/Toggle";
+import { NavBar } from "../components/NavBar";
 
 const usersData = [
   {
@@ -216,7 +215,7 @@ export const AdminPage = () => {
   return (
     <>
       <AdminPageContainer>
-        <Navbar />
+        <NavBar/>
         <AdminPageContent>
           {/* <Sidebar /> */}
           <div>

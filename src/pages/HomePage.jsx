@@ -20,10 +20,11 @@ import { Button } from "../components/Buttons";
 
 export const HomePage = () => {
   let history = useHistory();
- 
+
   return (
     <>
       <Sidebar />
+
       <Container>
         <Background />
         <Wave src={wave} alt="" />
