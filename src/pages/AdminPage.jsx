@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { Sidebar } from "../components/Sidebar";
+
+// import { Redirect } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/storage";
 import Modal from "../components/Modal";
 import { Table } from "../components/Table";
 import { Navbar } from "../styles/components/Sidebar";
@@ -15,7 +17,7 @@ import {
   Data,
   Name,
   Price,
-//   Button,
+  //   Button,
   ContainerCreate,
   Form,
   Label,
@@ -24,7 +26,8 @@ import {
 } from "../styles/components/Product";
 import { Input } from "../styles/components/Forms";
 import { Button } from "../components/Buttons";
-import  noimage from "../assets/noimage.jpg";
+import noimage from "../assets/noimage.jpg";
+import { ToogleLabel, ToggleInput, Slider, ToggleContainer } from "../components/Toggle";
 
 const usersData = [
   {
@@ -167,19 +170,40 @@ const productsData = [
 ];
 
 export const AdminPage = () => {
-//   const [showModal, setShowModal] = useState(true);
-  const [showAddProductModal, setShowAddProductModal] = useState(false)
-  const [showAddUserModal, setShowAddUserModal] = useState(false)
+  //   const [showModal, setShowModal] = useState(true);
+  const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [showEditProductModal, setShowEditProductModal] = useState(false);
   const [queryUsers, setQueryUsers] = useState("");
   const [queryProducts, setQueryProducts] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+  const [currentProduct, setCurrentProduct] = useState({})
 
+  const onSelectUser = (params) => {
+    console.log(params);
+    setCurrentUser(params);
+    setShowEditUserModal(true);
+  };
+  const onSelectProduct = (params) => {
+    console.log(params);
+    setCurrentProduct(params);
+    setShowEditProductModal(true);
+  };
+
+  const closeEditProductModal = () => {
+    setShowEditProductModal(false);
+  };
+  const closeEditUserModal = () => {
+    setShowEditUserModal(false);
+  };
   const closeAddProductModal = () => {
     setShowAddProductModal(false);
   };
 
   const openAddProductModal = () => {
     setShowAddProductModal(true);
-  }
+  };
 
   const closeAddUserModal = () => {
     setShowAddUserModal(false);
@@ -187,7 +211,7 @@ export const AdminPage = () => {
 
   const openAddUserModal = () => {
     setShowAddUserModal(true);
-  }
+  };
 
   return (
     <>
@@ -203,6 +227,7 @@ export const AdminPage = () => {
               isUser
               name="Usuarios"
               modal={openAddUserModal}
+              onSelectItem={onSelectUser}
             />
             <Table
               state={queryProducts}
@@ -210,8 +235,7 @@ export const AdminPage = () => {
               data={productsData}
               name="Productos"
               modal={openAddProductModal}
-
-
+              onSelectItem={onSelectProduct}
             />
           </div>
         </AdminPageContent>
@@ -221,6 +245,22 @@ export const AdminPage = () => {
       </Modal>
       <Modal handleClose={closeAddUserModal} isOpen={showAddUserModal}>
         <CreateUser />
+      </Modal>
+      <Modal handleClose={closeEditUserModal} isOpen={showEditUserModal}>
+        <CreateUser
+          edit
+          photoEdit={currentUser.photo}
+          nameEdit={currentUser.name}
+          roleEdit={currentUser.role}
+        />
+      </Modal>
+      <Modal handleClose={closeEditProductModal} isOpen={showEditProductModal}>
+        <CreateProduct
+          edit
+          photoEdit={currentProduct.photo}
+          nameEdit={currentProduct.name}
+          priceEdit={currentProduct.price}
+        />
       </Modal>
     </>
   );
@@ -238,10 +278,10 @@ export const Product = ({ photo, name, price, categories }) => {
   );
 };
 
- const CreateProduct = () => {
-  const [name, setName] = useState("Nombre del producto");
-  const [photo, setPhoto] = useState(noimage);
-  const [price, setPrice] = useState("$");
+const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
+  const [name, setName] = useState(nameEdit?nameEdit:"Nombre del producto");
+  const [photo, setPhoto] = useState(photoEdit?photoEdit:noimage);
+  const [price, setPrice] = useState(priceEdit?priceEdit:"$");
 
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
@@ -251,7 +291,11 @@ export const Product = ({ photo, name, price, categories }) => {
     <Div>
       <ContainerCreate>
         <Form>
-          <TitleCreate>Crear un producto</TitleCreate>
+          {edit ? (
+            <TitleCreate>Editar producto</TitleCreate>
+          ) : (
+            <TitleCreate>Crear producto</TitleCreate>
+          )}
           <Label htmlFor="name">Nombre del producto</Label>
           <Input
             id="name"
@@ -269,25 +313,32 @@ export const Product = ({ photo, name, price, categories }) => {
         </Form>
         <Product photo={photo} name={name} price={price} />
       </ContainerCreate>
-      <br/>
-      <Button>Crear producto</Button>
+      <br />
+      {edit ? (
+        <Button>Editar producto</Button>
+      ) : (
+        <Button>Crear producto</Button>
+      )}
     </Div>
   );
 };
- const CreateUser = () => {
-  const [name, setName] = useState("Nombre del usuario");
-  const [photo, setPhoto] = useState(noimage);
-  const [role, setRole] = useState("");
+const CreateUser = ({ edit, photoEdit, nameEdit, roleEdit }) => {
+  const [name, setName] = useState(nameEdit ? nameEdit : "Nombre del usuario");
+  const [photo, setPhoto] = useState(photoEdit ? photoEdit : noimage);
+  const [role, setRole] = useState(roleEdit ? roleEdit : "Role");
 
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
   };
-
   return (
     <Div>
       <ContainerCreate>
         <Form>
-          <TitleCreate>Crear usuario</TitleCreate>
+          {edit ? (
+            <TitleCreate>Editar usuario</TitleCreate>
+          ) : (
+            <TitleCreate>Crear usuario</TitleCreate>
+          )}
           <Label htmlFor="name">Nombre del usuario</Label>
           <Input
             id="name"
@@ -302,15 +353,27 @@ export const Product = ({ photo, name, price, categories }) => {
           />
           <Label htmlFor="photo">Selecciona la foto de perfil</Label>
           <FileUploader handleFile={handleFile} />
+          <ToggleContainer>
+          <p>Estado</p>
+          <ToogleLabel>
+            <ToggleInput type="checkbox"/>
+            <Slider />
+          </ToogleLabel>
+          </ToggleContainer>
+          
         </Form>
         <Product photo={photo} name={name} price={role} />
       </ContainerCreate>
-      <br/>
-      <Button>Crear usuario</Button>
+      <br />
+      {
+        edit
+        ?<Button>Editar usuario</Button>
+        :<Button>Crear usuario</Button>
+      }
+      
     </Div>
   );
 };
-
 
 const FileUploader = (props) => {
   const hiddenFileInput = React.useRef(null);

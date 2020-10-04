@@ -15,7 +15,7 @@ import { Button } from "../components/Buttons";
 import { Input } from "../styles/components/Forms";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 
-export const Table = ({ state, setState, isUser, name, data,modal }) => {
+export const Table = ({ state, setState, isUser, name, data,modal, onSelectItem }) => {
   const [showLess, setShowLess] = useState(false);
 
   return (
@@ -40,7 +40,7 @@ export const Table = ({ state, setState, isUser, name, data,modal }) => {
                 value.name.toLowerCase().includes(state.toLowerCase())
               )
               .map((value, index) => (
-                <ItemTable isUser={isUser} key={index} {...value} />
+                <ItemTable onSelectItem={()=>onSelectItem(value)} isUser={isUser} key={index} {...value} />
               ))}
       </TableContent>
     </TableContainer>
@@ -55,9 +55,11 @@ const ItemTable = ({
   category,
   price,
   createdAt,
+  onSelectItem
 }) => {
+
   return (
-    <ItemContainer>
+    <ItemContainer onClick={onSelectItem}>
       <IconLeft>
         <IconItem src={photo} alt="IconItem" />
         <div>
