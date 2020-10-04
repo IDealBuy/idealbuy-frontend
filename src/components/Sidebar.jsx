@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 import { Link, NavLink } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 import logo from "../assets/logo.png";
@@ -12,13 +13,15 @@ import {
   NavMenuItems,
   NavbarToggle,
   Brand,
-  OptionsLinks,
+  OptionsLinks, NavItem, NavList
 } from "../styles/components/Sidebar";
 import { Button } from "./Buttons";
-
 export const Sidebar = () => {
   const [sideBarState, setSideBarState] = useState(false);
   const showSidebar = () => setSideBarState(!sideBarState);
+
+  const { itemCount } = useContext(CartContext);
+
   const [{ user }] = useStateValue();
   return (
     <>
@@ -30,6 +33,9 @@ export const Sidebar = () => {
         <OptionsLinks>
           <NavLink to="/">Inicio</NavLink>
           <NavLink to="/products">Productos</NavLink>
+          <Link to="/cart">
+              <span>Cart: {itemCount}</span>
+            </Link>
           {user ? null : (
             <NavLink to="/login">
               <Button min>Login</Button>
@@ -50,6 +56,23 @@ export const Sidebar = () => {
             onClick={showSidebar}
           />
         </MenuBars>
+        {/* <NavList>
+          <NavItem>
+            <Link to="/">
+              <img src={logo} alt="" />
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/login">
+              <p>Sign Up / Log In</p>
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/cart">
+              <span>Cart: {itemCount}</span>
+            </Link>
+          </NavItem>
+        </NavList> */}
       </Navbar>
       <NavMenu active={sideBarState}>
         <NavMenuItems>

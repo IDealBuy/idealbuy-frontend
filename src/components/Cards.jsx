@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import {CartContext} from '../contexts/CartContext';
 import { MdAdd, MdRemove } from "react-icons/md";
+import { RectangularButton } from "./Buttons";
 import {
 	ContainerProductCard,
 	ImgProductCard,
@@ -9,17 +11,48 @@ import {
 	BackgroundPromo,
 	DataPromo,
 } from "../styles/components/Cards";
-import { RectangularButton } from "./Buttons";
 
-export const ProductCard = ({ home }) => {
+
+export const ProductCard = ({home, product}) => {
+	
+	const { addProduct, cartItems, increase, decrease, removeProduct } = useContext(CartContext);
+	const isInCart = product => {
+		
+		let isIt = cartItems.find(item => item.id === product.id);
+
+		return isIt
+        // return !!cartItems.find(item => item.id === product.id);
+	}
+	
+	
 	return (
-		<ContainerProductCard home={home}>
+		<ContainerProductCard>
 			<ImgProductCard
-				home={home}
-				src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80"
+			
+				src={product.photo}
 			/>
-			<ProductCardData name="Pan Tajado" price="$3000" weight="500g" />
-			{home ? null : <ButtonsProductCard />}
+			<ProductCardData name={product.name} price="$3000" description={product.description} />
+				{/* {home ? null : <ButtonsProductCard product={product} />} */}
+				<ContainerButtons>
+					<div>
+						{
+							!isInCart(product) && <RectangularButton onClick={ () => { addProduct(product) } }><MdAdd /></RectangularButton> 
+						}
+						{
+							isInCart(product) && <RectangularButton onClick={() => { increase(product) }} ><MdAdd /></RectangularButton> 
+						}
+						{
+							// product.quantity > 1 && <RectangularButton onClick={() => { decrease(product) } }>Restar</RectangularButton>
+							<RectangularButton  secondary onClick={() => { decrease(product) } }><MdRemove /></RectangularButton>
+						}
+					</div>
+				{
+					isInCart(product) ? <RectangularButton  secondary onClick={() => { removeProduct(product) } }>X</RectangularButton> : <RectangularButton  disabled secondary >X</RectangularButton>
+
+				}
+				
+			</ContainerButtons>
+
 		</ContainerProductCard>
 	);
 };
@@ -35,12 +68,12 @@ export const PromoCard = ({ productName, productPrice }) => {
 	);
 };
 
-const ProductCardData = ({ name, price, weight }) => {
+const ProductCardData = ({ name, price, description }) => {
 	return (
 		<ContainerData>
 			<div>
 				<TextCard bold>{name}</TextCard>
-				<TextCard small>{weight}</TextCard>
+				<TextCard small>{description}</TextCard>
 			</div>
 			<TextCard highlight>{price}</TextCard>
 		</ContainerData>
@@ -48,13 +81,14 @@ const ProductCardData = ({ name, price, weight }) => {
 };
 
 export const ButtonsProductCard = () => (
+	
 	<ContainerButtons>
-		<RectangularButton secondary>
+		<RectangularButton secondary >
 			<MdRemove />
 		</RectangularButton>
-		<TextCard>0</TextCard>
-		<RectangularButton>
+		<TextCard> 0 </TextCard>
+		<RectangularButton >
 			<MdAdd />
 		</RectangularButton>
-	</ContainerButtons>
+	</ContainerButtons>	
 );

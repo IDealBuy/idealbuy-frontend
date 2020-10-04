@@ -25,7 +25,7 @@ export const ContainerData = styled.div`
 
 export const ContainerButtons = styled.div`
   display: flex;
-  width: 30%;
+  width: 100%;
   justify-content: space-between;
   text-align: center;
   padding-left: 10px;
