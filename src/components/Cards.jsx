@@ -15,20 +15,16 @@ import {
 
 export const ProductCard = ({home, product}) => {
 	
-	const [cart, setCart] = useContext(CartContext);
-	
-	const addItem = () => {
+	const { addProduct, cartItems, increase, decrease, removeProduct } = useContext(CartContext);
+	const isInCart = product => {
 		
-		console.log('add item')
-		setCart(curr => [...curr,product])
-	}
-	
-	const removeItem = () => {
-		console.log('remove item')
-	}
-	
-	
+		let isIt = cartItems.find(item => item.id === product.id);
 
+		return isIt
+        // return !!cartItems.find(item => item.id === product.id);
+	}
+	
+	
 	return (
 		<ContainerProductCard>
 			<ImgProductCard
@@ -37,10 +33,20 @@ export const ProductCard = ({home, product}) => {
 			/>
 			<ProductCardData name={product.name} price="$3000" description={product.description} />
 			{/* {home ? null : <ButtonsProductCard product={product} />} */}
+			{
+				!isInCart(product) && <button onClick={ () => { addProduct(product) } }>Agregar</button> 
+			}
+			{
+				isInCart(product) && <button onClick={() => { increase(product) }} >Sumar</button> 
+			}
+			{
+				// product.quantity > 1 && <button onClick={() => { decrease(product) } }>Restar</button>
+				isInCart(product) && <button onClick={() => { decrease(product) } }>Restar</button>
+			}
+			
+			<button onClick={() => removeProduct(product)}>Remove</button>
+			
 
-			<button onClick={addItem}>Menos</button> 
-				Text
-			<button onClick={removeItem}>Más</button>
 		</ContainerProductCard>
 	);
 };
@@ -68,7 +74,7 @@ const ProductCardData = ({ name, price, description }) => {
 	);
 };
 
-export const ButtonsProductCard = (product) => (
+export const ButtonsProductCard = () => (
 	
 	<ContainerButtons>
 		<RectangularButton secondary >

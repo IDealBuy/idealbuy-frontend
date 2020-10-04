@@ -18,7 +18,7 @@ export const exampleProducts = [
                 price: '13.00'
             },
         },
-        active: true
+        active: true,
     },
     {
         id: 2,
@@ -39,7 +39,8 @@ export const exampleProducts = [
                 price: '3.00'
             },
         },
-        active: true
+        
+        active: true,
     },
     {
         id: 3,
@@ -60,6 +61,6 @@ export const exampleProducts = [
                 price: '63.00'
             },
         },
-        active: true
+        active: true,
     }
 ]
