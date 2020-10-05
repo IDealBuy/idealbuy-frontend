@@ -29,7 +29,6 @@ export const ProductCard = ({ home, product }) => {
     return isIt;
     // return !!cartItems.find(item => item.id === product.id);
   };
-
   return (
     <ContainerProductCard>
       <ImgProductCard src={product.productPhoto ? product.productPhoto : defaultImage} />

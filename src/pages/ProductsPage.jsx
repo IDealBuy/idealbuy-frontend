@@ -11,20 +11,24 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 const getProducts = gql`
-  query {
-    allProducts {
-      id
-      productPhoto
-      productName
-      productUnit
-      category
+query{
+  allFilterProducts{
+    edges{
+      node{
+        id
+        productName
+        productUnit
+        productPhoto
+        category
+      }
     }
   }
+}
 `;
 
 export const ProductsPage = () => {
   const { loading, error, data } = useQuery(getProducts);
-
+ 
   return (
     <>
       <CartProvider>
@@ -41,12 +45,14 @@ export const ProductsPage = () => {
               <Skeleton height="350px" />
             </>
           ) : (
-            data.allProducts.map((product) => {
+            data.allFilterProducts.edges.map((product) => {
               return (
-                <ProductCard product={product} key={product.id}></ProductCard>
+                <ProductCard product={product.node} key={product.id}></ProductCard>
               );
             })
-          )}
+            // <h1>Hola</h1>
+          )
+          }
         </ProductsContainer>
       </CartProvider>
     </>
