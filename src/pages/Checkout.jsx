@@ -2,7 +2,8 @@ import React from 'react'
 import CheckboxCart from '../components/CheckboxCart'
 import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 const CheckoutGrid = styled.section`
     display: grid;
@@ -99,7 +100,6 @@ export const Checkout = () => {
                         Additional service
                         <Toggle>
                             
-
                         </Toggle>
                         <Toggle>
                             

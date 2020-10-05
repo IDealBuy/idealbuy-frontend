@@ -4,10 +4,26 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+
+// import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+const client = new ApolloClient({
+  uri: "https://idealbuyy.herokuapp.com/graphql",
+  cache: new InMemoryCache()
+  // fetchOptions:{
+  //   mode: 'no-cors'
+  // }
+  
+});
+
 ReactDOM.render(
-    <React.StrictMode>
+  <React.StrictMode>
+    <ApolloProvider client={client}>
       <App />
-    </React.StrictMode>,
+    </ApolloProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

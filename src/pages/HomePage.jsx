@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { PromoCard, ProductCard } from "../components/Cards";
+import { useStateValue } from "../Context";
+
 import { Sidebar } from "../components/Sidebar";
 import {
-  BestSellers,
   Container,
   MainImage,
   Information,
@@ -12,7 +12,8 @@ import {
   Paragraph,
   ButtonsContainer,
   ImageMobile,
-  Wave
+  Wave,
+  Background,
 } from "../styles/pages/home";
 
 import wave from "../assets/wave.svg";
@@ -20,13 +21,17 @@ import shopping from "../assets/Online_shopping_SVG.svg";
 import { Button } from "../components/Buttons";
 
 export const HomePage = () => {
+  const [{ user }, dispatch] = useStateValue();
+
   let history = useHistory();
+
   return (
     <>
       <Sidebar />
+
       <Container>
-        <Wave src={wave} alt=""/>
-          
+        <Background />
+        <Wave src={wave} alt="" />
         <MainImage src={shopping} />
         <Information>
           <MainText>
@@ -36,16 +41,23 @@ export const HomePage = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
           </Paragraph>
-        <ImageMobile src={shopping} />
+          <ImageMobile src={shopping} />
 
-          <BestSellers>
-            <ProductCard home productName="Huevos" productPrice="$3000" />
-            <ProductCard home productName="Huevos" productPrice="$3000" />
-            <ProductCard home productName="Huevos" productPrice="$3000" />
-          </BestSellers>
           <ButtonsContainer>
-            <Button onClick={()=> history.push("/register")} mr_2>Registrate Gratis</Button>
-            <Button onClick={()=> history.push("/login")} secondary>Inicia Sesion</Button>
+            {user ? (
+              <Button onClick={() => history.push("/products")} mr_2>
+                Ver productos
+              </Button>
+            ) : (
+              <>
+                <Button onClick={() => history.push("/register")} mr_2>
+                  Registrate Gratis
+                </Button>
+                <Button onClick={() => history.push("/login")} secondary>
+                  Inicia Sesion
+                </Button>
+              </>
+            )}
           </ButtonsContainer>
         </Information>
       </Container>
