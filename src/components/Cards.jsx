@@ -32,7 +32,7 @@ export const ProductCard = ({ home, product }) => {
 
   return (
     <ContainerProductCard>
-      <ImgProductCard src={product.photo ? product.photo : defaultImage} />
+      <ImgProductCard src={product.productPhoto ? product.productPhoto : defaultImage} />
       <ProductCardData
         name={product.productName}
         price="$3000"
