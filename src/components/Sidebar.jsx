@@ -23,6 +23,7 @@ export const Sidebar = () => {
   const showSidebar = () => setSideBarState(!sideBarState);
   const { itemCount } = useContext(CartContext);
   const [{ user }, dispatch] = useStateValue();
+  const [{ cart }, dispatch2] = useStateValue();
 
   return (
     <>
@@ -36,7 +37,7 @@ export const Sidebar = () => {
           <NavLink to="/products">Productos</NavLink>
           {user ? (
             <Link to="/cart">
-              <span>Cart: {itemCount}</span>
+              <span>Cart: { cart.length}</span>
             </Link>
           ) : null}
 

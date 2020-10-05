@@ -6,6 +6,7 @@ import { exampleProducts } from "../services/exampleProducts";
 import { CartProvider } from "../contexts/CartContext";
 import Skeleton from "react-loading-skeleton";
 
+
 //graphql
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -21,12 +22,9 @@ const getProducts = gql`
 `;
 
 export const ProductsPage = () => {
-  const { loading, error, data } = useQuery(getProducts);
-  console.log(error);
-  if (!loading) {
-    console.log(data.allProducts);
-  }
 
+  const { loading, error, data } = useQuery(getProducts);
+ 
   return (
     <>
       <CartProvider>

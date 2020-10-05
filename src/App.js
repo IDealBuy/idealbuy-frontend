@@ -35,14 +35,21 @@ function App() {
   firebase.initializeApp(firebaseConfig);
   const initialState = {
     user: localStorage.getItem("userData"),
+    cart: JSON.parse(localStorage.getItem("cart"))
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [],
   };
   const reducer = (state, action) => {
-    console.log("reducer",action.type)
-    console.log("reducer",action.user)
     switch (action.type) {
       case "changeCurrentUser":
         return {
+          ...state,
           user: action.user,
+        };
+      case "addProductCart":
+        return {
+          ...state,
+          cart: action.cart,
         };
       default:
         return state;

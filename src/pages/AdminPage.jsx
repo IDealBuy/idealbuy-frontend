@@ -25,8 +25,18 @@ import {
 import { Input } from "../styles/components/Forms";
 import { Button } from "../components/Buttons";
 import noimage from "../assets/noimage.jpg";
-import { ToogleLabel, ToggleInput, Slider, ToggleContainer } from "../components/Toggle";
+import {
+  ToogleLabel,
+  ToggleInput,
+  Slider,
+  ToggleContainer,
+} from "../components/Toggle";
 import { NavBar } from "../components/NavBar";
+
+//graphql
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { Sidebar } from "../components/Sidebar";
 
 const usersData = [
   {
@@ -168,6 +178,25 @@ const productsData = [
   },
 ];
 
+// const createProduct = gql`
+// mutation{
+//   createProd(productName:"",productUnit:"", category:""){
+//   }
+// }
+// `;
+
+const createUser = gql`
+  mutation {
+    createUser(
+      userMail: "daniel@correo.com"
+      userPhoto: "pdfsfdl"
+      username: "daniel"
+    ) {
+      ok
+    }
+  }
+`;
+
 export const AdminPage = () => {
   //   const [showModal, setShowModal] = useState(true);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -177,7 +206,7 @@ export const AdminPage = () => {
   const [queryUsers, setQueryUsers] = useState("");
   const [queryProducts, setQueryProducts] = useState("");
   const [currentUser, setCurrentUser] = useState({});
-  const [currentProduct, setCurrentProduct] = useState({})
+  const [currentProduct, setCurrentProduct] = useState({});
 
   const onSelectUser = (params) => {
     console.log(params);
@@ -215,7 +244,7 @@ export const AdminPage = () => {
   return (
     <>
       <AdminPageContainer>
-        <NavBar/>
+        <Sidebar />
         <AdminPageContent>
           {/* <Sidebar /> */}
           <div>
@@ -278,9 +307,9 @@ export const Product = ({ photo, name, price, categories }) => {
 };
 
 const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
-  const [name, setName] = useState(nameEdit?nameEdit:"Nombre del producto");
-  const [photo, setPhoto] = useState(photoEdit?photoEdit:noimage);
-  const [price, setPrice] = useState(priceEdit?priceEdit:"$");
+  const [name, setName] = useState(nameEdit ? nameEdit : "Nombre del producto");
+  const [photo, setPhoto] = useState(photoEdit ? photoEdit : noimage);
+  const [price, setPrice] = useState(priceEdit ? priceEdit : "$");
 
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
@@ -353,23 +382,17 @@ const CreateUser = ({ edit, photoEdit, nameEdit, roleEdit }) => {
           <Label htmlFor="photo">Selecciona la foto de perfil</Label>
           <FileUploader handleFile={handleFile} />
           <ToggleContainer>
-          <p>Estado</p>
-          <ToogleLabel>
-            <ToggleInput type="checkbox"/>
-            <Slider />
-          </ToogleLabel>
+            <p>Estado</p>
+            <ToogleLabel>
+              <ToggleInput type="checkbox" />
+              <Slider />
+            </ToogleLabel>
           </ToggleContainer>
-          
         </Form>
         <Product photo={photo} name={name} price={role} />
       </ContainerCreate>
       <br />
-      {
-        edit
-        ?<Button>Editar usuario</Button>
-        :<Button>Crear usuario</Button>
-      }
-      
+      {edit ? <Button>Editar usuario</Button> : <Button>Crear usuario</Button>}
     </Div>
   );
 };

@@ -12,8 +12,10 @@ import {
   DataPromo,
 } from "../styles/components/Cards";
 import defaultImage from "../assets/noimage.jpg";
+import { useStateValue } from "../Context";
 
 export const ProductCard = ({ home, product }) => {
+  const [{ cart }, dispatch] = useStateValue();
   const {
     addProduct,
     cartItems,
@@ -40,9 +42,19 @@ export const ProductCard = ({ home, product }) => {
       <ContainerButtons>
         <div>
           {!isInCart(product) && (
-            <RectangularButton mr_1
+            <RectangularButton
+              mr_1
               onClick={() => {
-                addProduct(product);
+                console.log("cart",cart)
+                let lista = Array.from(cart).slice();
+                lista.push(product)
+                // lista.push(product)
+                console.log("lista",lista);
+                localStorage.setItem("cart",JSON.stringify(lista))
+                dispatch({
+                  type: "addProductCart",
+                  cart: lista,
+                });
               }}
             >
               <MdAdd />
@@ -50,8 +62,18 @@ export const ProductCard = ({ home, product }) => {
           )}
           {isInCart(product) && (
             <RectangularButton
+            mr_1
               onClick={() => {
-                increase(product);
+                console.log("cart",cart)
+                let lista = Array.from(cart).slice();
+                lista.push(product)
+                // lista.push(product)
+                console.log("lista",lista);
+                localStorage.setItem("cart",JSON.stringify(lista))
+                dispatch({
+                  type: "addProductCart",
+                  cart: lista,
+                });
               }}
             >
               <MdAdd />
