@@ -15,6 +15,7 @@ import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";
 import { SupermarketPage } from "./pages/SupermarketPage";
 import { Test } from "./pages/Test";
+import { CartPage } from "./pages/CartPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -75,6 +76,7 @@ function App() {
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/supermarket" component={SupermarketPage} />
             <Route exact path="/test" component={Test} />
+			<Route exact path="/cart" component={CartPage} />
           </Switch>
         </BrowserRouter>
       </CartProvider>
