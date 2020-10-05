@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
+import { useStateValue } from "../Context";
 import styled, {css} from 'styled-components'
 import { CartListProducts } from './CartListProducts'
 import { Sidebar } from "../components/Sidebar";
@@ -22,7 +23,9 @@ const CartEmptyContainer = styled.div`
 `
 
 export const CartPage = () => {
-    
+
+    const [{ cart }, dispatch2] = useStateValue();
+
     const { cartItems, itemCount, clearCart, checkout, handleCheckout } = useContext(CartContext);
     console.log(cartItems)
     return (
@@ -31,7 +34,7 @@ export const CartPage = () => {
             <CartContainer>
             <h1>Cart</h1>
                 {
-                    cartItems.length === 0 ? <CartEmptyContainer>Empty Cart</CartEmptyContainer>  : <CartListProducts />
+                    cart.length === 0 ? <CartEmptyContainer>Empty Cart</CartEmptyContainer>  : <CartListProducts />
                 }
             <Link to="/products">
                 <Button secondary>Buy more!</Button>

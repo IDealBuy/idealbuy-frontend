@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components'
 import { RectButton } from "./Buttons";
 import { RectangularButton } from "./Buttons";
 
+
 const CartIemContainer = styled.div`
     width: 100%;
     display: flex;
@@ -25,21 +26,23 @@ const Actions = styled.div`
 
 
 
-export const CartItemComponent = () => {
+export const CartItemComponent = ({product}) => {
     return(
         <>
-            <CartIemContainer >
+            {/* <CartIemContainer >
                 <Quantity>
                     12
                 </Quantity>
                 <Description>
                     <img />
-                    <p>Lorem description</p>
+                    <p>{product.productName}</p>
                 </Description>
                 <Actions>
                     <RectangularButton>X</RectangularButton>
                 </Actions>
-            </CartIemContainer>
+            </CartIemContainer> */}
+
+            
             
         </>
     )
