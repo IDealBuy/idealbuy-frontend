@@ -31,11 +31,9 @@ import {
   Slider,
   ToggleContainer,
 } from "../components/Toggle";
-import { NavBar } from "../components/NavBar";
 
 //graphql
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 import { Sidebar } from "../components/Sidebar";
 
 const usersData = [
@@ -185,17 +183,17 @@ const productsData = [
 // }
 // `;
 
-const createUser = gql`
-  mutation {
-    createUser(
-      userMail: "daniel@correo.com"
-      userPhoto: "pdfsfdl"
-      username: "daniel"
-    ) {
-      ok
-    }
-  }
-`;
+// const createUser = gql`
+//   mutation {
+//     createUser(
+//       userMail: "daniel@correo.com"
+//       userPhoto: "pdfsfdl"
+//       username: "daniel"
+//     ) {
+//       ok
+//     }
+//   }
+// `;
 
 export const AdminPage = () => {
   //   const [showModal, setShowModal] = useState(true);

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 import { MdAdd, MdRemove } from "react-icons/md";
 import { RectangularButton } from "./Buttons";
@@ -17,9 +17,9 @@ import { useStateValue } from "../Context";
 export const ProductCard = ({ home, product }) => {
   const [{ cart }, dispatch] = useStateValue();
   const {
-    addProduct,
+    // addProduct,
     cartItems,
-    increase,
+    // increase,
     decrease,
     removeProduct,
   } = useContext(CartContext);

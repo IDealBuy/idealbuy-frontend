@@ -2,7 +2,6 @@ import React from "react";
 import { ProductCard } from "../components/Cards";
 import { Sidebar } from "../components/Sidebar";
 import { ProductsContainer, Title } from "../styles/pages/productsPage";
-import { exampleProducts } from "../services/exampleProducts";
 import { CartProvider } from "../contexts/CartContext";
 import Skeleton from "react-loading-skeleton";
 
@@ -27,7 +26,7 @@ query{
 `;
 
 export const ProductsPage = () => {
-  const { loading, error, data } = useQuery(getProducts);
+  const { loading, data } = useQuery(getProducts);
  
   return (
     <>
@@ -37,12 +36,12 @@ export const ProductsPage = () => {
         <ProductsContainer>
           {loading ? (
             <>
-              <Skeleton height="350px" />
-              <Skeleton height="350px" />
-              <Skeleton height="350px" />
-              <Skeleton height="350px" />
-              <Skeleton height="350px" />
-              <Skeleton height="350px" />
+              <Skeleton key={1} height="350px" />
+              <Skeleton key={2} height="350px" />
+              <Skeleton key={3}height="350px" />
+              <Skeleton key={4} height="350px" />
+              <Skeleton key={5} height="350px" />
+              <Skeleton key={6} height="350px" />
             </>
           ) : (
             data.allFilterProducts.edges.map((product) => {

@@ -1,26 +1,24 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../contexts/CartContext';
+import React from 'react';
 import { useStateValue } from "../Context";
-import styled, {css} from 'styled-components'
-import { CartItemComponent } from '../components/CartItemComponent'
+// import styled, {css} from 'styled-components'
+// import { CartItemComponent } from '../components/CartItemComponent'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/Buttons'
-import { ProductsContainer, Title } from "../styles/pages/productsPage";
+import { ProductsContainer } from "../styles/pages/productsPage";
 import { ProductCard } from "../components/Cards";
-import Skeleton from "react-loading-skeleton";
+// import Skeleton from "react-loading-skeleton";
 
 export const CartListProducts = () => {
     
-    const { cartItems, itemCount, clearCart, checkout, handleCheckout } = useContext(CartContext);
-    const [{ cart }, dispatch2] = useStateValue();
+    const [{ cart }] = useStateValue();
     
     return (
         <>
             <ProductsContainer>
                 {
-                    cart.map((product) => {
+                    cart.map((product,index) => {
                         return (
-                            <ProductCard product={product} key={product.id}></ProductCard>
+                            <ProductCard product={product} key={index}></ProductCard>
                         );
                     })
 

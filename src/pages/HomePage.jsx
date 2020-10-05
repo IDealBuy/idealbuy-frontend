@@ -21,7 +21,7 @@ import shopping from "../assets/Online_shopping_SVG.svg";
 import { Button } from "../components/Buttons";
 
 export const HomePage = () => {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
 
   let history = useHistory();
 

@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
-import { CartContext } from "../contexts/CartContext";
+import React, { useState } from "react";
+// import { CartContext } from "../contexts/CartContext";
 import { Link, NavLink } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 import logo from "../assets/logo.png";
 import { useStateValue } from "../Context";
 import { logout } from "../utils/auth";
 import { toast } from "react-toastify";
+import { MdShoppingCart } from "react-icons/md";
 
 import {
   Navbar,
@@ -21,9 +22,9 @@ import { Button } from "./Buttons";
 export const Sidebar = () => {
   const [sideBarState, setSideBarState] = useState(false);
   const showSidebar = () => setSideBarState(!sideBarState);
-  const { itemCount } = useContext(CartContext);
+  // const { itemCount } = useContext(CartContext);
   const [{ user }, dispatch] = useStateValue();
-  const [{ cart }, dispatch2] = useStateValue();
+  const [{ cart }] = useStateValue();
 
   return (
     <>
@@ -37,7 +38,8 @@ export const Sidebar = () => {
           <NavLink to="/products">Productos</NavLink>
           {user ? (
             <Link to="/cart">
-              <span>Cart: { cart.length}</span>
+              <MdShoppingCart size="32px" />
+              {cart.length}
             </Link>
           ) : null}
 
@@ -103,6 +105,14 @@ export const Sidebar = () => {
               </Link>
             </NavText>
           )}
+          {user ?  (
+            <NavText>
+              <Link to="/cart">
+                <MdShoppingCart size="32px" />
+                {cart.length}
+              </Link>
+            </NavText>
+          ) :null}
           {user ? null : (
             <NavText>
               <Link to="/register">

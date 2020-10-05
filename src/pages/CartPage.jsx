@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../contexts/CartContext';
+import React from 'react';
 import { useStateValue } from "../Context";
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import { CartListProducts } from './CartListProducts'
 import { Sidebar } from "../components/Sidebar";
 import {Link} from 'react-router-dom'
@@ -24,10 +23,8 @@ const CartEmptyContainer = styled.div`
 
 export const CartPage = () => {
 
-    const [{ cart }, dispatch2] = useStateValue();
+    const [{ cart } ] = useStateValue();
 
-    const { cartItems, itemCount, clearCart, checkout, handleCheckout } = useContext(CartContext);
-    console.log(cartItems)
     return (
         <>
             <Sidebar />

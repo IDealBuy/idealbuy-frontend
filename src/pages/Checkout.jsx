@@ -3,7 +3,6 @@ import CheckboxCart from '../components/CheckboxCart'
 import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 
 const CheckoutGrid = styled.section`
     display: grid;

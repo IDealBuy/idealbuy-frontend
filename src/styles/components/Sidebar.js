@@ -22,6 +22,11 @@ export const MenuBars = styled(Link)`
   }
 `;
 
+export const ContainerCart= styled.div`
+  display:flex;
+  align-items:center;
+`
+
 export const NavList = styled.ul`
   display: flex;
   justify-content: center;
@@ -122,6 +127,8 @@ export const Brand = styled.div`
 `;
 
 export const OptionsLinks = styled.div`
+display:flex;
+align-items:center;
   & > a {
     text-decoration: none;
     color: white;
