@@ -4,6 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 import logo from "../assets/logo.png";
 import { useStateValue } from "../Context";
+import { logout } from "../utils/auth";
+import { toast } from "react-toastify";
 
 import {
   Navbar,
@@ -13,16 +15,15 @@ import {
   NavMenuItems,
   NavbarToggle,
   Brand,
-  OptionsLinks, NavItem, NavList
+  OptionsLinks,
 } from "../styles/components/Sidebar";
 import { Button } from "./Buttons";
 export const Sidebar = () => {
   const [sideBarState, setSideBarState] = useState(false);
   const showSidebar = () => setSideBarState(!sideBarState);
-
   const { itemCount } = useContext(CartContext);
+  const [{ user }, dispatch] = useStateValue();
 
-  const [{ user }] = useStateValue();
   return (
     <>
       <Navbar>
@@ -33,9 +34,12 @@ export const Sidebar = () => {
         <OptionsLinks>
           <NavLink to="/">Inicio</NavLink>
           <NavLink to="/products">Productos</NavLink>
-          <Link to="/cart">
+          {user ? (
+            <Link to="/cart">
               <span>Cart: {itemCount}</span>
             </Link>
+          ) : null}
+
           {user ? null : (
             <NavLink to="/login">
               <Button min>Login</Button>
@@ -48,6 +52,23 @@ export const Sidebar = () => {
               </Button>
             </NavLink>
           )}
+          {user ? (
+            <Button
+              mr_2
+              onClick={() => {
+                logout();
+                dispatch({
+                  type: "changeCurrentUser",
+                  user: null,
+                });
+                toastSucces("Sesión cerrada");
+              }}
+              min
+              secondary
+            >
+              Logout
+            </Button>
+          ) : null}
         </OptionsLinks>
         <MenuBars to="#">
           <MdMenu
@@ -56,23 +77,6 @@ export const Sidebar = () => {
             onClick={showSidebar}
           />
         </MenuBars>
-        {/* <NavList>
-          <NavItem>
-            <Link to="/">
-              <img src={logo} alt="" />
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/login">
-              <p>Sign Up / Log In</p>
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/cart">
-              <span>Cart: {itemCount}</span>
-            </Link>
-          </NavItem>
-        </NavList> */}
       </Navbar>
       <NavMenu active={sideBarState}>
         <NavMenuItems>
@@ -105,8 +109,38 @@ export const Sidebar = () => {
               </Link>
             </NavText>
           )}
+          {user ? (
+            <NavText>
+              <Button
+                mr_2
+                onClick={() => {
+                  logout();
+                  dispatch({
+                    type: "changeCurrentUser",
+                    user: null,
+                  });
+                  toastSucces("Sesión cerrada");
+                }}
+                secondary
+              >
+                Logout
+              </Button>
+            </NavText>
+          ) : null}
         </NavMenuItems>
       </NavMenu>
     </>
   );
+};
+
+const toastSucces = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 };

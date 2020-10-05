@@ -2,23 +2,53 @@ import React from "react";
 import { ProductCard } from "../components/Cards";
 import { Sidebar } from "../components/Sidebar";
 import { ProductsContainer, Title } from "../styles/pages/productsPage";
-import { exampleProducts } from '../services/exampleProducts'
-import { CartProvider } from '../contexts/CartContext'
+import { exampleProducts } from "../services/exampleProducts";
+import { CartProvider } from "../contexts/CartContext";
+import Skeleton from "react-loading-skeleton";
+
+//graphql
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+
+const getProducts = gql`
+  query {
+    allProducts {
+      productName
+      productUnit
+      category
+    }
+  }
+`;
 
 export const ProductsPage = () => {
+  const { loading, error, data } = useQuery(getProducts);
+  console.log(error);
+  if (!loading) {
+    console.log(data.allProducts);
+  }
+
   return (
     <>
       <CartProvider>
-        <Sidebar>
-        </Sidebar>
-        <Title>Category name</Title>
+        <Sidebar></Sidebar>
+        <Title>Productos</Title>
         <ProductsContainer>
-          {
-            exampleProducts.map((product, inx, exmProds)=>{
-              return <ProductCard product={product} key={product.id}></ProductCard>
+          {loading ? (
+            <>
+              <Skeleton height="350px" />
+              <Skeleton height="350px" />
+              <Skeleton height="350px" />
+              <Skeleton height="350px" />
+              <Skeleton height="350px" />
+              <Skeleton height="350px" />
+            </>
+          ) : (
+            data.allProducts.map((product) => {
+              return (
+                <ProductCard product={product} key={product.id}></ProductCard>
+              );
             })
-          }
-          
+          )}
         </ProductsContainer>
       </CartProvider>
     </>

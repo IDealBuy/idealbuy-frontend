@@ -37,10 +37,11 @@ function App() {
     user: localStorage.getItem("userData"),
   };
   const reducer = (state, action) => {
+    console.log("reducer",action.type)
+    console.log("reducer",action.user)
     switch (action.type) {
       case "changeCurrentUser":
         return {
-          ...state,
           user: action.user,
         };
       default:

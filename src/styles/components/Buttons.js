@@ -13,9 +13,12 @@ export const RectButton = styled.button`
     props.secondary === true &&
     css`
       background: var(--secondary-color50);
-    `
-    
-    }
+    `}
+  ${(props) =>
+    props.mr_1 &&
+    css`
+      margin-right: 1em;
+    `}
 `;
 
 export const NormButton = styled.button`
@@ -36,22 +39,21 @@ export const NormButton = styled.button`
   ${(props) =>
     props.mr_2 === true &&
     css`
-      margin-right:20px;
+      margin-right: 20px;
     `}
   ${(props) =>
     props.mr_1 === true &&
     css`
-      margin-right:1em;
+      margin-right: 1em;
     `}
     ${(props) =>
     props.min &&
     css`
-      font-size:16px;
-      width:120px;
+      font-size: 16px;
+      width: 120px;
       padding: 0 1em;
     `}
     @media ${device.mobileM} {
-      height: 30px;
-
+    height: 30px;
   }
 `;

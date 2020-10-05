@@ -1,5 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "../Context";
+
 import { Sidebar } from "../components/Sidebar";
 import {
   Container,
@@ -19,6 +21,8 @@ import shopping from "../assets/Online_shopping_SVG.svg";
 import { Button } from "../components/Buttons";
 
 export const HomePage = () => {
+  const [{ user }, dispatch] = useStateValue();
+
   let history = useHistory();
 
   return (
@@ -40,12 +44,20 @@ export const HomePage = () => {
           <ImageMobile src={shopping} />
 
           <ButtonsContainer>
-            <Button onClick={() => history.push("/register")} mr_2>
-              Registrate Gratis
-            </Button>
-            <Button onClick={() => history.push("/login")} secondary>
-              Inicia Sesion
-            </Button>
+            {user ? (
+              <Button onClick={() => history.push("/products")} mr_2>
+                Ver productos
+              </Button>
+            ) : (
+              <>
+                <Button onClick={() => history.push("/register")} mr_2>
+                  Registrate Gratis
+                </Button>
+                <Button onClick={() => history.push("/login")} secondary>
+                  Inicia Sesion
+                </Button>
+              </>
+            )}
           </ButtonsContainer>
         </Information>
       </Container>
