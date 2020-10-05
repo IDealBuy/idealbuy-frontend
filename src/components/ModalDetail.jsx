@@ -8,7 +8,7 @@ import {
 	ImageDetail,
 } from "../styles/components/modalDetail";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import { Button, RectangularButton } from "../components/Buttons";
+import { Button } from "../components/Buttons";
 import { ButtonsProductCard } from "../components/Cards";
 
 export default function ModalDetail() {
@@ -49,7 +49,7 @@ export default function ModalDetail() {
 			<ImageDetail>
 				<img
 					src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=689&q=80"
-					alt="image detail"
+					alt="detail"
 				/>
 				<p>prev 1/4 next</p>
 			</ImageDetail>
@@ -65,7 +65,7 @@ export const RelatedItem = () => (
 	<ItemRelated>
 		<img
 			src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=689&q=80"
-			alt="product image"
+			alt="product"
 		/>
 		<h4>$ 1.00</h4>
 	</ItemRelated>

@@ -1,9 +1,9 @@
 import React from "react";
 import { ProductCard } from "../components/Cards";
+import { Sidebar } from "../components/Sidebar";
 import { ProductsContainer, Title } from "../styles/pages/productsPage";
 import { exampleProducts } from '../services/exampleProducts'
 import { CartProvider } from '../contexts/CartContext'
-import { Sidebar } from '../components/Sidebar'
 
 export const ProductsPage = () => {
   return (

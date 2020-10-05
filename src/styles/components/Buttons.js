@@ -43,6 +43,13 @@ export const NormButton = styled.button`
     css`
       margin-right:1em;
     `}
+    ${(props) =>
+    props.min &&
+    css`
+      font-size:16px;
+      width:120px;
+      padding: 0 1em;
+    `}
     @media ${device.mobileM} {
       height: 30px;
 

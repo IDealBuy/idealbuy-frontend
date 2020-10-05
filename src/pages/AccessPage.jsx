@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-//import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 //import "react-toastify/dist/ReactToastify.css";
 
 import { Input } from "../styles/components/Forms";
@@ -19,8 +19,9 @@ import shoppingCart from "../assets/shoppingCart.svg";
 import { Button } from "../components/Buttons";
 import { handleSignUp, handleSignIn, handleGoogleSignIn } from "../utils/auth";
 import { useStateValue } from "../Context";
+import { Sidebar } from "../components/Sidebar";
 
-export const AccessPage = ({loginPage=true}) => {
+export const AccessPage = ({ loginPage = true }) => {
   const [login, setLogin] = useState(loginPage);
   const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
@@ -46,27 +47,71 @@ export const AccessPage = ({loginPage=true}) => {
 
   const submit = ({ option, email, password }) => {
     if (option === "login") {
-      handleSignIn(email, password).then((resp) => {
-        if (resp !== undefined) {
-          handleLocalStorage(resp.user);
-          history.push("/");
-        }
-      });
+      handleSignIn(email, password)
+        .then((resp) => {
+          if (resp !== undefined) {
+            handleLocalStorage(resp.user);
+            toastSucces("Bienvenido 😃");
+            history.push("/");
+          }
+        })
+        .catch((e) => {
+          console.log("Sigin with email", e);
+          toastError("Credenciales incorrectas! 😵");
+        });
     } else if (option === "gmail") {
-      handleGoogleSignIn().then((resp) => {
-        if (resp !== undefined) {
-          handleLocalStorage(resp.user);
-          history.push("/");
-        }
-      });
+      handleGoogleSignIn()
+        .then((resp) => {
+          if (resp !== undefined) {
+            handleLocalStorage(resp.user);
+            toastSucces("Bienvenido 😃");
+            history.push("/");
+          }
+        })
+        .catch((e) => {
+          console.log("Sigin with google", e);
+          toastError("Upps algo salio mal, intentalo de nuevo! 😵");
+        });
     } else {
-      handleSignUp(email, password).then((resp) => {
-        if (resp !== undefined) {
-          handleLocalStorage(resp);
-          history.push("/");
-        }
-      });
+      handleSignUp(email, password)
+        .then((resp) => {
+          if (resp !== undefined) {
+            handleLocalStorage(resp);
+            toastSucces("Bienvenido 😃");
+            history.push("/");
+          }
+        })
+        .catch((e) => {
+          if (e.code === "auth/weak-password") {
+            toastError("La contraseña debe tener mínimo 6 caracteres! 🧘 ");
+          } else {
+            console.log("SignUp with email", e);
+            toastError("Upps algo salio mal, intentalo de nuevo! 😵");
+          }
+        });
     }
+  };
+  const toastSucces = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  const toastError = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const Login = () => {
@@ -156,15 +201,18 @@ export const AccessPage = ({loginPage=true}) => {
   };
 
   return (
-    <Section>
-      <Dialog>
-        <div>
-          <Img src={logo} alt="" />
-        </div>
-        {login ? <Login /> : <Register />}
-      </Dialog>
-      <ShoppingCart src={shoppingCart} alt="" />
-    </Section>
+    <>
+      <Sidebar />
+      <Section>
+        <Dialog>
+          <div>
+            <Img src={logo} alt="" />
+          </div>
+          {login ? <Login /> : <Register />}
+        </Dialog>
+        <ShoppingCart src={shoppingCart} alt="" />
+      </Section>
+    </>
   );
 };
 
@@ -178,7 +226,7 @@ const OrSeparator = () => (
 
 const OptionsSignIn = ({ onSubmit }) => {
   return (
-    <div style={{textAlign:"center"}}>
+    <div style={{ textAlign: "center" }}>
       <img
         onClick={() => onSubmit({ option: "gmail" })}
         src={gmail_logo}

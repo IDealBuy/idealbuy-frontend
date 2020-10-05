@@ -39,8 +39,8 @@ export const Dialog = styled.div`
     border-radius: 16px;
     grid-column-start: 2;
     grid-column-end: 12;
-    grid-row-start: 3;
-    grid-row-end: 11;
+    /* grid-row-start: 3;
+    grid-row-end: 11; */
   }
 `;
 

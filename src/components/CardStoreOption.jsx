@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from "../components/Buttons";
-import styled, {css} from 'styled-components';
-import { Link } from "react-router-dom";
+import styled  from 'styled-components';
+// import { Link } from "react-router-dom";
 import walmart_logo from '../assets/images/walmart_logo.png'
 import chedrahui_logo from '../assets/images/chedrahui_logo.png'
 import lacomer_logo from '../assets/images/lacomer_logo.png'
