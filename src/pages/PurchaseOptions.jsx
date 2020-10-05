@@ -2,6 +2,7 @@ import React from "react";
 import { CardStoreOption } from "../components/CardStoreOption";
 import styled from "styled-components";
 import iDealLogo from "../assets/logotipo.png";
+import { useStateValue } from "../Context";
 
 const LogoContainer = styled.div`
   margin: 0 auto;
@@ -70,6 +71,19 @@ const AnotherOptionsContainer = styled(PurchaseOptionsContainer)`
 `;
 
 export const PurchaseOptions = () => {
+
+    const [{ cart }, dispatch2] = useStateValue();
+
+    console.log(cart)
+    
+    let items = cart.map((item) => {
+        return item.id
+    })
+
+    const cartId = [... new Set(items)]
+
+    console.log(cartId)
+
   return (
     <>
       <LogoContainer>

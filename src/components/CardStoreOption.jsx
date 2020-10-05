@@ -6,6 +6,7 @@ import walmart_logo from '../assets/images/walmart_logo.png'
 import chedrahui_logo from '../assets/images/chedrahui_logo.png'
 import lacomer_logo from '../assets/images/lacomer_logo.png'
 import soriana_logo from '../assets/images/soriana_logo.png'
+import { Link } from 'react-router-dom'
 
 const CardStoreOptionContainer = styled.div`
     border: 1px solid #e5e5e5;
@@ -88,9 +89,11 @@ export const CardStoreOption = () => {
                     </Location>
 
                 </CardStoreOptionInfo>
-                <Button>
-                    Pagar ahora
-                </Button>
+                <Link to="/checkout">
+                    <Button>
+                        Pagar ahora
+                    </Button>
+                </Link>
 
             </CardStoreOptionContainer>
         </>

@@ -13,7 +13,7 @@ export const CartListProducts = () => {
     
     const { cartItems, itemCount, clearCart, checkout, handleCheckout } = useContext(CartContext);
     const [{ cart }, dispatch2] = useStateValue();
-    console.log(cart)
+    
     return (
         <>
             <ProductsContainer>
@@ -27,7 +27,7 @@ export const CartListProducts = () => {
                 }
 
             </ProductsContainer>
-            <Link to="/compare">
+            <Link to="/PurchaseOptions">
                 <Button>Haz la magia</Button>
             </Link> 
         </>
