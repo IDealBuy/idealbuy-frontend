@@ -29,12 +29,7 @@ export const Dialog = styled.div`
   -moz-box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.25);
 
-  @media ${device.laptopL} {
-    grid-column-start: 1;
-  grid-column-end: 6;
-  grid-row-start: 1;
-  grid-row-end: 13;
-  }
+ 
   @media ${device.tablet} {
     border-radius: 16px;
     grid-column-start: 2;

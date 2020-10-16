@@ -33,8 +33,9 @@ import {
 } from "../components/Toggle";
 
 //graphql
-// import { gql } from "apollo-boost";
+import { gql } from "apollo-boost";
 import { Sidebar } from "../components/Sidebar";
+import { useMutation } from "@apollo/client";
 
 const usersData = [
   {
@@ -176,24 +177,7 @@ const productsData = [
   },
 ];
 
-// const createProduct = gql`
-// mutation{
-//   createProd(productName:"",productUnit:"", category:""){
-//   }
-// }
-// `;
 
-// const createUser = gql`
-//   mutation {
-//     createUser(
-//       userMail: "daniel@correo.com"
-//       userPhoto: "pdfsfdl"
-//       username: "daniel"
-//     ) {
-//       ok
-//     }
-//   }
-// `;
 
 export const AdminPage = () => {
   //   const [showModal, setShowModal] = useState(true);
@@ -304,10 +288,21 @@ export const Product = ({ photo, name, price, categories }) => {
   );
 };
 
-const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
+const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit, unitEdit }) => {
   const [name, setName] = useState(nameEdit ? nameEdit : "Nombre del producto");
-  const [photo, setPhoto] = useState(photoEdit ? photoEdit : noimage);
-  const [price, setPrice] = useState(priceEdit ? priceEdit : "$");
+  const [photo, setPhoto] = useState(photoEdit ? photoEdit : "https://firebasestorage.googleapis.com/v0/b/idealbuy-af400.appspot.com/o/noimage.jpg?alt=media&token=7776fb06-a750-47f2-9a39-7e81429e3f47");
+  // const [price, setPrice] = useState(priceEdit ? priceEdit : "$");
+  const [unit, setUnit] = useState(unitEdit ? unitEdit : "0g");
+  const [category, setCategory] = useState(unitEdit ? unitEdit : "Varios");
+
+  const createProduct = gql`
+    mutation($name: String!,$unit: String!,$category: String!,$photo: String!){
+    createProd(productName:$name,productUnit:$unit, category:$category,productPhoto:$photo){
+      ok
+      }
+    }
+  `;
+  const [addProduct, { data }] = useMutation(createProduct);
 
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
@@ -328,22 +323,28 @@ const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
-          <Label htmlFor="price">Precio producto</Label>
+          <Label htmlFor="price">Peso del producto</Label>
           <Input
-            id="price"
-            type="number"
-            onChange={(e) => setPrice(`$${e.target.value}`)}
+            id="unit"
+            type="text"
+            onChange={(e) => setUnit(e.target.value)}
           />
           <Label htmlFor="photo">Selecciona la imagen del producto</Label>
           <FileUploader handleFile={handleFile} />
         </Form>
-        <Product photo={photo} name={name} price={price} />
+        <Product photo={photo} name={name} price={unit} />
       </ContainerCreate>
       <br />
       {edit ? (
         <Button>Editar producto</Button>
       ) : (
-        <Button>Crear producto</Button>
+        <Button onClick={
+          (e)=>{
+            e.preventDefault();
+            addProduct({variables:{name:name,unit:unit,category:category,photo:photo}})
+            console.log("crear")
+          }
+        }>Crear producto</Button>
       )}
     </Div>
   );

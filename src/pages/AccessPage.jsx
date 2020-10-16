@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import {  toast } from "react-toastify";
-//import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 import { Input } from "../styles/components/Forms";
 import {
@@ -21,10 +20,25 @@ import { handleSignUp, handleSignIn, handleGoogleSignIn } from "../utils/auth";
 import { useStateValue } from "../Context";
 import { Sidebar } from "../components/Sidebar";
 
+//graphql
+import { gql } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import Modal from "../components/Modal";
+
 export const AccessPage = ({ loginPage = true }) => {
   const [login, setLogin] = useState(loginPage);
   const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
+  const [correctSignUp, setCorrectSignUp] = useState(false);
+  const [emailSubmit, setEmailSubmit] = useState("")
+  const [passSubmit, setPassSubmit] = useState("")
+  const [uid, setUid] = useState("")
+
+
+  
+  const closeCorrectSignUpModal = () => {
+    setCorrectSignUp(false);
+  };
 
   const changeType = () => {
     console.log(user);
@@ -46,6 +60,8 @@ export const AccessPage = ({ loginPage = true }) => {
   };
 
   const submit = ({ option, email, password }) => {
+    
+
     if (option === "login") {
       handleSignIn(email, password)
         .then((resp) => {
@@ -78,6 +94,10 @@ export const AccessPage = ({ loginPage = true }) => {
           if (resp !== undefined) {
             handleLocalStorage(resp);
             toastSucces("Bienvenido 😃");
+            setEmailSubmit(email)
+            setPassSubmit(password)
+            setUid(resp.uid)
+            setCorrectSignUp(true)
             history.push("/");
           }
         })
@@ -124,42 +144,59 @@ export const AccessPage = ({ loginPage = true }) => {
     };
 
     return (
-      <LoginContainer>
-        <h3>Log In</h3>
-        <OptionsSignIn onSubmit={submit} />
-        <label htmlFor="">Email</label>
-        <Input
-          key="email"
-          id="email"
-          value={email}
-          onChange={handleInput}
-          type="text"
-        />
-        <br />
-        <label htmlFor="">Password</label>
-        <Input
-          id="password"
-          onChange={handleInput}
-          value={password}
-          type="password"
-        />
-        <div style={{ height: "1.5em" }}></div>
+      <>
+        <LoginContainer>
+          <h3>Log In</h3>
+          <OptionsSignIn onSubmit={submit} />
+          <label htmlFor="">Email</label>
+          <Input
+            key="email"
+            id="email"
+            value={email}
+            onChange={handleInput}
+            type="text"
+          />
+          <br />
+          <label htmlFor="">Password</label>
+          <Input
+            id="password"
+            onChange={handleInput}
+            value={password}
+            type="password"
+          />
+          <div style={{ height: "1.5em" }}></div>
 
-        <Button
-          onClick={() => {
-            submit({ option: "login", email, password });
-          }}
-        >
-          Log In
-        </Button>
-        <OrSeparator />
-        <Button secondary={true} onClick={() => changeType(email, password)}>
-          Sign Up
-        </Button>
-        <div style={{ height: "50px" }}></div>
-      </LoginContainer>
+          <Button
+            onClick={() => {
+              submit({ option: "login", email, password });
+            }}
+          >
+            Log In
+          </Button>
+          <OrSeparator />
+          <Button secondary={true} onClick={() => changeType(email, password)}>
+            Sign Up
+          </Button>
+          <div style={{ height: "50px" }}></div>
+        </LoginContainer>
+        
+      </>
     );
   };
+
+  const signUpBack = gql`
+      mutation ($userFirebase:String!, $userMail:String!){
+        createUser(
+          userFirebase:"$userFirebase"
+          userMail:"$userMail"
+          userPhoto:"nophoto"
+          username:"noname" 
+        )
+      }
+    `;
+
+  const [signUpBackMut, { data }] = useMutation(signUpBack);
+
 
   const Register = () => {
     const [email, setEmail] = useState("");
@@ -188,7 +225,18 @@ export const AccessPage = ({ loginPage = true }) => {
         />
         <div style={{ height: "1.5em" }}></div>
 
-        <Button onClick={() => submit({ option: "signup", email, password })}>
+        <Button
+          onClick={() => {
+            submit({ option: "signup", email, password });
+            console.log(uid)
+            console.log(email)
+            console.log("muta",signUpBack)
+            signUpBackMut({variables:{userFirebase:{uid},userMail:{email}}})
+              .then(e=> console.log(e))
+              .catch(error=>console.log(error))
+            console.log("data",data)
+          }}
+        >
           Sign Up
         </Button>
         <OrSeparator />
@@ -196,6 +244,12 @@ export const AccessPage = ({ loginPage = true }) => {
           Log In
         </Button>
         <div style={{ height: "50px" }}></div>
+        {/* <Modal handleClose={closeCorrectSignUpModal} isOpen={correctSignUp}>
+          <CorrectSignUp userFirebase={uid} userMail={emailSubmit} >
+            
+          </CorrectSignUp>
+
+        </Modal> */}
       </LoginContainer>
     );
   };
@@ -234,4 +288,29 @@ const OptionsSignIn = ({ onSubmit }) => {
       />
     </div>
   );
+};
+
+const CorrectSignUp = ({ userFirebase, userMail }) => {
+  console.log("--------------")
+  console.log(userFirebase)
+  console.log(userMail)
+  console.log("--------------")
+
+  const signUpBack = gql`
+      mutation {
+        createUser(
+          userFirebase:"${userFirebase}"
+          userMail:"${userMail}"
+          userPhoto:""
+          username: ""
+        )
+      }
+    `;
+
+  const { loading, error, data } = useMutation(signUpBack);
+  console.log("error", error);
+  if (!loading) {
+    console.log("data",data);
+  }
+  return <h1>Yeeeeei</h1>;
 };
