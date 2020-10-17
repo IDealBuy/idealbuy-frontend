@@ -68,7 +68,7 @@ const Location = styled.div`
 `;
 
 // export const CardStoreOption = ({ total, stores, deliveryTime, location  }) => {
-export const CardStoreOption = ({ data, one }) => {
+export const CardStoreOption = ({ data, one, checkout }) => {
     
     let multiAmount = 0;
 
@@ -110,18 +110,10 @@ export const CardStoreOption = ({ data, one }) => {
           </DeliveryTime>
           <Location>¡Más cerca de casa! (1km)</Location>
         </CardStoreOptionInfo>
+        {
+          checkout ? <> </> : <Link to={{pathname: '/checkout', state: { selectedOption: data, one: one}}}><Button>Pagar ahora</Button></Link>
+        }
         
-        <Link
-          to={{
-            pathname: '/checkout',
-            state: {
-              selectedOption: data,
-              one: one
-            }
-          }}
-        >
-          <Button>Pagar ahora</Button>
-        </Link>
       </CardStoreOptionContainer>
     </>
   );

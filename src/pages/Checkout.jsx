@@ -138,7 +138,7 @@ export const Checkout = (data) => {
                                 return (
                                     <ProductItem key={idx}>
                                         <div className="itemList">
-                                            {idx}
+                                            
                                         </div>
                                         <div className="productPhoto">
                                             <img src={item.productPhoto} alt=""/>
@@ -165,7 +165,7 @@ export const Checkout = (data) => {
                     </TitleSection>
                     
                     {/* <ProductCard product={product.node} key={product.id}></ProductCard> */}
-                    <CardStoreOption data={selectedOption} one={one}></CardStoreOption>
+                    <CardStoreOption data={selectedOption} one={one} checkout={true}></CardStoreOption>
                     <OrderReview superId={superId} totalPrice={totalPrice}>
                         
                     </OrderReview>
