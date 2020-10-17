@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import {  toast } from "react-toastify";
-//import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 import { Input } from "../styles/components/Forms";
 import {
@@ -36,6 +35,7 @@ export const AccessPage = ({ loginPage = true }) => {
     let userData = {
       email: user.email,
       uid: user.uid,
+      role: user.role,
     };
     localStorage.setItem("userData", JSON.stringify(userData));
     dispatch({
@@ -50,9 +50,13 @@ export const AccessPage = ({ loginPage = true }) => {
       handleSignIn(email, password)
         .then((resp) => {
           if (resp !== undefined) {
-            handleLocalStorage(resp.user);
+            handleLocalStorage(resp);
             toastSucces("Bienvenido 😃");
-            history.push("/");
+            if (resp.role === "admin") {
+              history.push("/admin");
+            } else {
+              history.push("/");
+            }
           }
         })
         .catch((e) => {
@@ -63,9 +67,13 @@ export const AccessPage = ({ loginPage = true }) => {
       handleGoogleSignIn()
         .then((resp) => {
           if (resp !== undefined) {
-            handleLocalStorage(resp.user);
+            handleLocalStorage(resp);
             toastSucces("Bienvenido 😃");
-            history.push("/");
+            if (resp.role === "admin") {
+              history.push("/admin");
+            } else {
+              history.push("/");
+            }
           }
         })
         .catch((e) => {
@@ -78,7 +86,11 @@ export const AccessPage = ({ loginPage = true }) => {
           if (resp !== undefined) {
             handleLocalStorage(resp);
             toastSucces("Bienvenido 😃");
-            history.push("/");
+            if (resp.role === "admin") {
+              history.push("/admin");
+            } else {
+              history.push("/");
+            }
           }
         })
         .catch((e) => {
@@ -124,40 +136,42 @@ export const AccessPage = ({ loginPage = true }) => {
     };
 
     return (
-      <LoginContainer>
-        <h3>Log In</h3>
-        <OptionsSignIn onSubmit={submit} />
-        <label htmlFor="">Email</label>
-        <Input
-          key="email"
-          id="email"
-          value={email}
-          onChange={handleInput}
-          type="text"
-        />
-        <br />
-        <label htmlFor="">Password</label>
-        <Input
-          id="password"
-          onChange={handleInput}
-          value={password}
-          type="password"
-        />
-        <div style={{ height: "1.5em" }}></div>
+      <>
+        <LoginContainer>
+          <h3>Log In</h3>
+          <OptionsSignIn onSubmit={submit} />
+          <label htmlFor="">Email</label>
+          <Input
+            key="email"
+            id="email"
+            value={email}
+            onChange={handleInput}
+            type="text"
+          />
+          <br />
+          <label htmlFor="">Password</label>
+          <Input
+            id="password"
+            onChange={handleInput}
+            value={password}
+            type="password"
+          />
+          <div style={{ height: "1.5em" }}></div>
 
-        <Button
-          onClick={() => {
-            submit({ option: "login", email, password });
-          }}
-        >
-          Log In
-        </Button>
-        <OrSeparator />
-        <Button secondary={true} onClick={() => changeType(email, password)}>
-          Sign Up
-        </Button>
-        <div style={{ height: "50px" }}></div>
-      </LoginContainer>
+          <Button
+            onClick={() => {
+              submit({ option: "login", email, password });
+            }}
+          >
+            Log In
+          </Button>
+          <OrSeparator />
+          <Button secondary={true} onClick={() => changeType(email, password)}>
+            Sign Up
+          </Button>
+          <div style={{ height: "50px" }}></div>
+        </LoginContainer>
+      </>
     );
   };
 
@@ -188,7 +202,11 @@ export const AccessPage = ({ loginPage = true }) => {
         />
         <div style={{ height: "1.5em" }}></div>
 
-        <Button onClick={() => submit({ option: "signup", email, password })}>
+        <Button
+          onClick={() => {
+            submit({ option: "signup", email, password });
+          }}
+        >
           Sign Up
         </Button>
         <OrSeparator />

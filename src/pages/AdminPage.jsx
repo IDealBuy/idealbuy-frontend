@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // import { Redirect } from "react-router-dom";
 
@@ -31,83 +31,13 @@ import {
   Slider,
   ToggleContainer,
 } from "../components/Toggle";
+import Skeleton from "react-loading-skeleton";
 
 //graphql
-// import { gql } from "apollo-boost";
+import { gql } from "apollo-boost";
 import { Sidebar } from "../components/Sidebar";
-
-const usersData = [
-  {
-    id: 1,
-    name: "Felicity Gallahue",
-    email: "fgallahue0@desdev.cn",
-    photo: "http://dummyimage.com/136x144.bmp/dddddd/000000",
-    role: "Registered Nurse",
-  },
-  {
-    id: 2,
-    name: "Rosamund Auton",
-    email: "rauton1@digg.com",
-    photo: "http://dummyimage.com/136x527.png/dddddd/000000",
-    role: "Help Desk Technician",
-  },
-  {
-    id: 3,
-    name: "Lauretta Elvy",
-    email: "lelvy2@paypal.com",
-    photo: "http://dummyimage.com/509x479.bmp/cc0000/ffffff",
-    role: "Research Nurse",
-  },
-  {
-    id: 4,
-    name: "Demetre Pinhorn",
-    email: "dpinhorn3@github.io",
-    photo: "http://dummyimage.com/572x508.jpg/dddddd/000000",
-    role: "Research Associate",
-  },
-  {
-    id: 5,
-    name: "Pietra Vahey",
-    email: "pvahey4@trellian.com",
-    photo: "http://dummyimage.com/103x429.png/cc0000/ffffff",
-    role: "General Manager",
-  },
-  {
-    id: 6,
-    name: "Maynord Gregoratti",
-    email: "mgregoratti5@kickstarter.com",
-    photo: "http://dummyimage.com/220x486.png/dddddd/000000",
-    role: "Pharmacist",
-  },
-  {
-    id: 7,
-    name: "Arleyne Ragbourn",
-    email: "aragbourn6@narod.ru",
-    photo: "http://dummyimage.com/191x404.png/ff4444/ffffff",
-    role: "Assistant Manager",
-  },
-  {
-    id: 8,
-    name: "Jana Turpey",
-    email: "jturpey7@domainmarket.com",
-    photo: "http://dummyimage.com/190x432.png/cc0000/ffffff",
-    role: "Information Systems Manager",
-  },
-  {
-    id: 9,
-    name: "Ianthe Cumes",
-    email: "icumes8@cloudflare.com",
-    photo: "http://dummyimage.com/126x599.jpg/cc0000/ffffff",
-    role: "Geologist IV",
-  },
-  {
-    id: 10,
-    name: "Amelia Kearton",
-    email: "akearton9@ocn.ne.jp",
-    photo: "http://dummyimage.com/465x462.jpg/cc0000/ffffff",
-    role: "Community Outreach Specialist",
-  },
-];
+import { useMutation, useQuery } from "@apollo/client";
+import { getAllUsers } from "../utils/userManage";
 
 const productsData = [
   {
@@ -176,27 +106,7 @@ const productsData = [
   },
 ];
 
-// const createProduct = gql`
-// mutation{
-//   createProd(productName:"",productUnit:"", category:""){
-//   }
-// }
-// `;
-
-// const createUser = gql`
-//   mutation {
-//     createUser(
-//       userMail: "daniel@correo.com"
-//       userPhoto: "pdfsfdl"
-//       username: "daniel"
-//     ) {
-//       ok
-//     }
-//   }
-// `;
-
 export const AdminPage = () => {
-  //   const [showModal, setShowModal] = useState(true);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
@@ -205,6 +115,8 @@ export const AdminPage = () => {
   const [queryProducts, setQueryProducts] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [currentProduct, setCurrentProduct] = useState({});
+  const [loadingUsers, setLoadingUsers] = useState(true);
+  const [dataUsers, setDataUsers] = useState([]);
 
   const onSelectUser = (params) => {
     console.log(params);
@@ -239,6 +151,30 @@ export const AdminPage = () => {
     setShowAddUserModal(true);
   };
 
+  const getAllProducts = gql`
+    query {
+      allProducts {
+        id
+        productName
+        productUnit
+        productPhoto
+        category
+      }
+    }
+  `;
+
+  useEffect(() => {
+    getAllUsers().then((e) => {
+      setDataUsers(e);
+      setLoadingUsers(false);
+    });
+  }, []);
+
+  const { loading,error, data } = useQuery(getAllProducts);
+  if(!loading){
+
+    console.log(data.allProducts)
+  }
   return (
     <>
       <AdminPageContainer>
@@ -246,23 +182,45 @@ export const AdminPage = () => {
         <AdminPageContent>
           {/* <Sidebar /> */}
           <div>
-            <Table
-              state={queryUsers}
-              setState={setQueryUsers}
-              data={usersData}
-              isUser
-              name="Usuarios"
-              modal={openAddUserModal}
-              onSelectItem={onSelectUser}
-            />
-            <Table
-              state={queryProducts}
-              setState={setQueryProducts}
-              data={productsData}
-              name="Productos"
-              modal={openAddProductModal}
-              onSelectItem={onSelectProduct}
-            />
+            {loading ? (
+              <>
+                <Skeleton key={1} height="350px" />
+                <Skeleton key={2} height="350px" />
+                <Skeleton key={3} height="350px" />
+                <Skeleton key={4} height="350px" />
+                <Skeleton key={5} height="350px" />
+                <Skeleton key={6} height="350px" />
+              </>
+            ) : (
+              <Table
+                state={queryUsers}
+                setState={setQueryUsers}
+                data={dataUsers}
+                isUser
+                name="Usuarios"
+                modal={openAddUserModal}
+                onSelectItem={onSelectUser}
+              />
+            )}
+            {loading ? (
+              <>
+                <Skeleton key={1} height="350px" />
+                <Skeleton key={2} height="350px" />
+                <Skeleton key={3} height="350px" />
+                <Skeleton key={4} height="350px" />
+                <Skeleton key={5} height="350px" />
+                <Skeleton key={6} height="350px" />
+              </>
+            ) : (
+              <Table
+                state={queryProducts}
+                setState={setQueryProducts}
+                data={data.allProducts}
+                name="Productos"
+                modal={openAddProductModal}
+                onSelectItem={onSelectProduct}
+              />
+            )}
           </div>
         </AdminPageContent>
       </AdminPageContainer>
@@ -283,8 +241,8 @@ export const AdminPage = () => {
       <Modal handleClose={closeEditProductModal} isOpen={showEditProductModal}>
         <CreateProduct
           edit
-          photoEdit={currentProduct.photo}
-          nameEdit={currentProduct.name}
+          photoEdit={currentProduct.productPhoto}
+          nameEdit={currentProduct.productName}
           priceEdit={currentProduct.price}
         />
       </Modal>
@@ -299,15 +257,42 @@ export const Product = ({ photo, name, price, categories }) => {
       <Data>
         <Name>{name}</Name>
         <Price>{price}</Price>
+        <Price>{price}</Price>
       </Data>
     </Article>
   );
 };
 
-const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
+const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit, unitEdit }) => {
   const [name, setName] = useState(nameEdit ? nameEdit : "Nombre del producto");
-  const [photo, setPhoto] = useState(photoEdit ? photoEdit : noimage);
-  const [price, setPrice] = useState(priceEdit ? priceEdit : "$");
+  const [photo, setPhoto] = useState(
+    photoEdit
+      ? photoEdit
+      : "https://firebasestorage.googleapis.com/v0/b/idealbuy-af400.appspot.com/o/noimage.jpg?alt=media&token=7776fb06-a750-47f2-9a39-7e81429e3f47"
+  );
+
+  const [unit, setUnit] = useState(unitEdit ? unitEdit : "0g");
+  const [category, setCategory] = useState(unitEdit ? unitEdit : "Varios");
+
+  const createProduct = gql`
+    mutation(
+      $name: String!
+      $unit: String!
+      $category: String!
+      $photo: String!
+    ) {
+      createProd(
+        productName: $name
+        productUnit: $unit
+        category: $category
+        productPhoto: $photo
+      ) {
+        ok
+      }
+    }
+  `;
+
+  const [addProduct, { data }] = useMutation(createProduct);
 
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
@@ -328,26 +313,42 @@ const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit }) => {
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
-          <Label htmlFor="price">Precio producto</Label>
+          <Label htmlFor="price">Peso del producto</Label>
           <Input
-            id="price"
-            type="number"
-            onChange={(e) => setPrice(`$${e.target.value}`)}
+            id="unit"
+            type="text"
+            onChange={(e) => setUnit(e.target.value)}
           />
           <Label htmlFor="photo">Selecciona la imagen del producto</Label>
           <FileUploader handleFile={handleFile} />
         </Form>
-        <Product photo={photo} name={name} price={price} />
+        <Product photo={photo} name={name} price={unit} />
       </ContainerCreate>
       <br />
       {edit ? (
         <Button>Editar producto</Button>
       ) : (
-        <Button>Crear producto</Button>
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            addProduct({
+              variables: {
+                name: name,
+                unit: unit,
+                category: category,
+                photo: photo,
+              },
+            });
+            console.log("crear");
+          }}
+        >
+          Crear producto
+        </Button>
       )}
     </Div>
   );
 };
+
 const CreateUser = ({ edit, photoEdit, nameEdit, roleEdit }) => {
   const [name, setName] = useState(nameEdit ? nameEdit : "Nombre del usuario");
   const [photo, setPhoto] = useState(photoEdit ? photoEdit : noimage);

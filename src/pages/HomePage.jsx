@@ -38,8 +38,8 @@ export const HomePage = () => {
             <Highlight>Economico</Highlight>, eficaz y rapido
           </MainText>
           <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+            Tus productos favoritos con los precios más bajos, sin importar
+            donde se encuentren.
           </Paragraph>
           <ImageMobile src={shopping} />
 
