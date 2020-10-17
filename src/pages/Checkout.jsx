@@ -4,7 +4,7 @@ import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
 import styled from 'styled-components'
 import { CardStoreOption } from "../components/CardStoreOption";
-import { ProductCard } from "../components/Cards";
+// import { ProductCard } from "../components/Cards";
 
 const CheckoutGrid = styled.section`
     display: grid;

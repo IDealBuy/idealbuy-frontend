@@ -11,7 +11,7 @@ import { StateProvider } from "./Context";
 import { CartProvider } from "./contexts/CartContext";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
-import { Sidebar } from "./components/Sidebar";
+// import { Sidebar } from "./components/Sidebar";
 import { RenderPDF } from './pages/OrderPrintPdf'
 import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";

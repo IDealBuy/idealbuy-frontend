@@ -2,13 +2,13 @@ import React from "react";
 import { Button } from "../components/Buttons";
 import styled from "styled-components";
 // import { Link } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const CheckoutView = () => {
-  let location = useLocation();
-  console.log(location.pathname);
-  return <span>Path : {location.pathname}</span>
-}
+// const CheckoutView = () => {
+//   let location = useLocation();
+//   console.log(location.pathname);
+//   return <span>Path : {location.pathname}</span>
+// }
 
 const CardStoreOptionContainer = styled.div`
   border: 1px solid #e5e5e5;

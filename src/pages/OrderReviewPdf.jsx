@@ -1,11 +1,10 @@
 import React from 'react'
-import ReactPDF, {
+import {
   Document,
   Page,
   Text,
   Image,
   StyleSheet,
-  Font,
 } from '@react-pdf/renderer';
 
 // Create styles
@@ -72,11 +71,11 @@ const styles = StyleSheet.create({
 //   src: `${__dirname}/fonts/Roboto-Regular.ttf`,
 // });
 
-const Subtitle = ({ children, ...props }) => (
-  <Text style={styles.subtitle} {...props}>
-    {children}
-  </Text>
-);
+// const Subtitle = ({ children, ...props }) => (
+//   <Text style={styles.subtitle} {...props}>
+//     {children}
+//   </Text>
+// );
 
 let order = JSON.parse( localStorage.getItem('cart') )
 
@@ -99,7 +98,7 @@ export const OrderReviewPdf = () => (
           return(
             <>
               <Text key={item.id}>
-                {idx+1} - {item.productName} -> ... $
+                {idx+1} - {item.productName} 
               </Text>
             </>
           )

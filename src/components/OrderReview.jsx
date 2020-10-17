@@ -29,34 +29,34 @@ const OrderTitle = styled.p`
     font-weight: bold;
 `
 
-const OrderDetailContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1.5fr .5fr;
-    grid-gap: 2em;
-`
-const OrderDetailContainerChild = styled.div`
-    align-self: center;
-    /* justify-self: center; */
-`
+// const OrderDetailContainer = styled.div`
+//     display: grid;
+//     grid-template-columns: 1.5fr .5fr;
+//     grid-gap: 2em;
+// `
+// const OrderDetailContainerChild = styled.div`
+//     align-self: center;
+//     /* justify-self: center; */
+// `
 
-const OrderCuponInput = styled.input`
-    width: 100%;
-    border: 1px solid #e5e5e5;
-    box-sizing: border-box;
-    padding: 1em;
-    border-radius: 10px;
-    text-transform: uppercase;
-`
+// const OrderCuponInput = styled.input`
+//     width: 100%;
+//     border: 1px solid #e5e5e5;
+//     box-sizing: border-box;
+//     padding: 1em;
+//     border-radius: 10px;
+//     text-transform: uppercase;
+// `
 
-const OrderButton = styled.button`
-    background: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #e5e5e5;
-    height: 35px;
-`
+// const OrderButton = styled.button`
+//     background: var(--primary-color);
+//     color: white;
+//     font-weight: bold;
+//     width: 100%;
+//     border-radius: 10px;
+//     border: 1px solid #e5e5e5;
+//     height: 35px;
+// `
 
 const RedParagraph = styled.p`
     color: var(--primary-color);

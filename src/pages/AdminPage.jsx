@@ -39,72 +39,72 @@ import { Sidebar } from "../components/Sidebar";
 import { useMutation, useQuery } from "@apollo/client";
 import { getAllUsers } from "../utils/userManage";
 
-const productsData = [
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-  {
-    name: "Pan tajado",
-    photo:
-      "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
-    category: "Panaderia",
-    price: 2000,
-    createdAt: "06-08-2020",
-  },
-];
+// const productsData = [
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+//   {
+//     name: "Pan tajado",
+//     photo:
+//       "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=687&q=80",
+//     category: "Panaderia",
+//     price: 2000,
+//     createdAt: "06-08-2020",
+//   },
+// ];
 
 export const AdminPage = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -170,10 +170,12 @@ export const AdminPage = () => {
     });
   }, []);
 
-  const { loading,error, data } = useQuery(getAllProducts);
-  if(!loading){
-
-    console.log(data.allProducts)
+  const { loading, error, data } = useQuery(getAllProducts);
+  if (!loading) {
+    console.log(data.allProducts);
+  }
+  if (error && loadingUsers) {
+    console.log(error);
   }
   return (
     <>
@@ -294,6 +296,12 @@ const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit, unitEdit }) => {
 
   const [addProduct, { data }] = useMutation(createProduct);
 
+  const setTheCategory = (category) => {
+    if (data) {
+      setCategory(category);
+    }
+  };
+
   const handleFile = (fileUploaded) => {
     setPhoto(URL.createObjectURL(fileUploaded));
   };
@@ -326,7 +334,7 @@ const CreateProduct = ({ edit, photoEdit, nameEdit, priceEdit, unitEdit }) => {
       </ContainerCreate>
       <br />
       {edit ? (
-        <Button>Editar producto</Button>
+        <Button onClick={setTheCategory}>Editar producto</Button>
       ) : (
         <Button
           onClick={(e) => {
@@ -391,7 +399,7 @@ const CreateUser = ({ edit, photoEdit, nameEdit, roleEdit }) => {
         <Product photo={photo} name={name} price={role} />
       </ContainerCreate>
       <br />
-      {edit ? <Button>Editar usuario</Button> : <Button>Crear usuario</Button>}
+      {edit ? <Button  >Editar usuario</Button> : <Button>Crear usuario</Button>}
     </Div>
   );
 };
