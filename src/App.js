@@ -11,10 +11,8 @@ import { StateProvider } from "./Context";
 import { CartProvider } from "./contexts/CartContext";
 import { AccessPage } from "./pages/AccessPage";
 import { HomePage } from "./pages/HomePage";
-<<<<<<< HEAD
 import { Sidebar } from "./components/Sidebar";
 import { RenderPDF } from './pages/OrderPrintPdf'
-=======
 import { PurchaseOptions } from "./pages/PurchaseOptions";
 import { AdminPage } from "./pages/AdminPage";
 import { SupermarketPage } from "./pages/SupermarketPage";
@@ -24,7 +22,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // import { Sidebar } from "./components/Sidebar";
->>>>>>> development
 
 function App() {
   var firebaseConfig = {

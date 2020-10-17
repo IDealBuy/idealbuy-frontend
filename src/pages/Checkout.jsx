@@ -3,6 +3,8 @@ import CheckboxCart from '../components/CheckboxCart'
 import Toggle from '../components/Toggle'
 import OrderReview from '../components/OrderReview'
 import styled from 'styled-components'
+import { CardStoreOption } from "../components/CardStoreOption";
+import { ProductCard } from "../components/Cards";
 
 const CheckoutGrid = styled.section`
     display: grid;
@@ -67,8 +69,61 @@ const GridPayment = styled.div`
 const TitleSection = styled.h3`
     color: var(--secondary-color);
 `
+const ProductItem = styled.div`
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: .3em;
+    border-bottom: 1px solid #e5e5e5;
+    align-items: center;
+    img {
+        width: 30px;    
+    }
+    
+`
 
-export const Checkout = () => {
+// const countItems = (cartArr) => {
+
+//     // console.log(cartArr)
+//     let cartResult
+
+//     let itemsId = cartArr.map((item, idx)=>{
+//         return item.id
+//     })
+
+//     let count = itemsId.reduce((acc, value) => ({
+//         ...acc,
+//         [value]: (acc[value] || 0) + 1
+//      }), {});
+
+//     // console.log(count)
+
+//      let orderCart = cartArr.map((item,idx) => {
+//         return item
+//      })
+
+//      let cartSimple = orderCart.filter((item, index)=> orderCart.indexOf(item.id) === index )
+
+//      console.table(cartSimple)
+
+//      return cartResult = cartSimple.map((item, idx)=>{
+//         return {
+//             product: item,
+//             quantity: count[item.id] 
+//         }
+//      })
+// }
+
+
+export const Checkout = (data) => {
+    
+    let {selectedOption, one} = data.location.state
+    let {superId, totalPrice} = data.location.state.selectedOption
+    let cartCheckbox = JSON.parse( localStorage.getItem('cart') )
+    // let itemsCart = countItems(cartCheckbox)
+
+    // console.log(itemsCart)
     return (
         <>
             <CheckoutGrid>
@@ -76,12 +131,44 @@ export const Checkout = () => {
                         <TitleSection>
                             Order
                         </TitleSection>
+                        
+                        {
+                            cartCheckbox.map((item, idx) => {
+                                
+                                return (
+                                    <ProductItem key={idx}>
+                                        <div className="itemList">
+                                            {idx}
+                                        </div>
+                                        <div className="productPhoto">
+                                            <img src={item.productPhoto} alt=""/>
+                                        </div>
+                                        <div className="productName">
+                                            {item.productName}
+
+                                        </div>
+                                        <div className="productSuper">
+
+                                        </div>
+
+                                    </ProductItem>
+
+                                )
+                                
+                            })
+                            
+                        }
                 </GridOrder>
                 <GridSummary>
                     <TitleSection>
                         Payment Summary
                     </TitleSection>
-                    <OrderReview></OrderReview>
+                    
+                    {/* <ProductCard product={product.node} key={product.id}></ProductCard> */}
+                    <CardStoreOption data={selectedOption} one={one}></CardStoreOption>
+                    <OrderReview superId={superId} totalPrice={totalPrice}>
+                        
+                    </OrderReview>
 
                 </GridSummary>
                 <GridDelivery>
@@ -89,10 +176,6 @@ export const Checkout = () => {
                         Delivery
                     </TitleSection>
                     <CheckboxCart> </CheckboxCart>
-                    <CheckboxCart> </CheckboxCart>
-                    <CheckboxCart> </CheckboxCart>
-                    <CheckboxCart> </CheckboxCart>
-
                 </GridDelivery>
                 <GridAditionalService>
                     <TitleSection>
@@ -100,10 +183,7 @@ export const Checkout = () => {
                         <Toggle>
                             
                         </Toggle>
-                        <Toggle>
-                            
-
-                        </Toggle>
+                        
                     </TitleSection>
                 </GridAditionalService>
                 <GridPayment>

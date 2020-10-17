@@ -2,7 +2,13 @@ import React from "react";
 import { Button } from "../components/Buttons";
 import styled from "styled-components";
 // import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
+const CheckoutView = () => {
+  let location = useLocation();
+  console.log(location.pathname);
+  return <span>Path : {location.pathname}</span>
+}
 
 const CardStoreOptionContainer = styled.div`
   border: 1px solid #e5e5e5;
@@ -63,13 +69,14 @@ const Location = styled.div`
 
 // export const CardStoreOption = ({ total, stores, deliveryTime, location  }) => {
 export const CardStoreOption = ({ data, one }) => {
+    
     let multiAmount = 0;
 
     if(!one){
         data.forEach(element => {
             multiAmount+= element.price
         });
-        console.log(multiAmount)
+        
     }
   return (
     <>
@@ -103,7 +110,16 @@ export const CardStoreOption = ({ data, one }) => {
           </DeliveryTime>
           <Location>¡Más cerca de casa! (1km)</Location>
         </CardStoreOptionInfo>
-        <Link to="/checkout">
+        
+        <Link
+          to={{
+            pathname: '/checkout',
+            state: {
+              selectedOption: data,
+              one: one
+            }
+          }}
+        >
           <Button>Pagar ahora</Button>
         </Link>
       </CardStoreOptionContainer>

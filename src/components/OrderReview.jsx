@@ -73,7 +73,8 @@ const OrderTransactionInfo = styled.div`
     margin: 1.5em 0;
 `
 
-const OrderReview = () => {
+const OrderReview = ({superId, totalPrice}) => {
+    
     return(
         <OrderReviewContainer>
             <OrderTitleContainer>
@@ -84,7 +85,7 @@ const OrderReview = () => {
                     No. de transacción
                 </div>
                 <div>
-                    #123432123
+                    {superId}
                 </div>
 
             </OrderTransactionInfo>
@@ -104,7 +105,7 @@ const OrderReview = () => {
                     Subtotal
                 </div>
                 <div>
-                    $122
+                    {totalPrice}
                 </div>
 
             </OrderTransactionInfo>
@@ -124,7 +125,7 @@ const OrderReview = () => {
                     Total
                 </div>
                 <div>
-                    132
+                    {totalPrice}
                 </div>
 
             </OrderTransactionInfo>
