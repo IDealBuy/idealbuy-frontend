@@ -69,7 +69,7 @@ const Location = styled.div`
 
 // export const CardStoreOption = ({ total, stores, deliveryTime, location  }) => {
 export const CardStoreOption = ({ data, one, checkout }) => {
-  
+    console.log(data)
     let multiAmount = 0;
 
     if(!one){

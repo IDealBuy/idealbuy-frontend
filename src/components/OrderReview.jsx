@@ -1,6 +1,8 @@
 import React from 'react'
 // import GlobalStyle from '../globalStyles'
 import styled from 'styled-components'
+import { Button } from './Buttons'
+import { Link } from 'react-router-dom'
 
 const OrderReviewContainer = styled.section`
     width: 100%;
@@ -78,9 +80,9 @@ const OrderReview = ({superId, totalPrice}) => {
     return(
         <OrderReviewContainer>
             <OrderTitleContainer>
-                <OrderTitle>CUENTA DE INVITADO</OrderTitle>
+                <OrderTitle>Total del carrito</OrderTitle>
             </OrderTitleContainer>
-            <OrderTransactionInfo>
+            {/* <OrderTransactionInfo>
                 <div>
                     No. de transacción
                 </div>
@@ -88,18 +90,18 @@ const OrderReview = ({superId, totalPrice}) => {
                     {superId}
                 </div>
 
-            </OrderTransactionInfo>
-            <OrderDivider />
+            </OrderTransactionInfo> */}
+            
 
-            <OrderDetailContainer>
+            {/* <OrderDetailContainer>
                 <OrderDetailContainerChild>
                     <OrderCuponInput placeholder="CUPON" type="text"/>
                 </OrderDetailContainerChild>
                 <OrderDetailContainerChild>
                     <OrderButton>Aplicar</OrderButton>
                 </OrderDetailContainerChild>
-            </OrderDetailContainer>
-            <OrderDivider />
+            </OrderDetailContainer> */}
+            {/* <OrderDivider /> */}
             <OrderTransactionInfo>
                 <div>
                     Subtotal
@@ -120,6 +122,7 @@ const OrderReview = ({superId, totalPrice}) => {
                 </div>
 
             </OrderTransactionInfo>
+            <OrderDivider />
             <OrderTransactionInfo>
                 <div>
                     Total
@@ -129,9 +132,12 @@ const OrderReview = ({superId, totalPrice}) => {
                 </div>
 
             </OrderTransactionInfo>
-            <OrderTitleContainer>
+            {/* <OrderTitleContainer>
                 <OrderTitle>EXPIRA EN: 21 horas, 31 minutos</OrderTitle>
-            </OrderTitleContainer>
+            </OrderTitleContainer> */}
+            <Link to={{pathname: '/pdf'}}>
+                <Button>Realizar el pedido</Button>
+            </Link>
         </OrderReviewContainer>
     )
 }

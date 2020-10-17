@@ -4,7 +4,7 @@ import { PDFViewer } from '@react-pdf/renderer';
 import { OrderReviewPdf } from './OrderReviewPdf'
 
 export const RenderPDF = () => (
-  <PDFViewer width='100%' height='500'>
+  <PDFViewer width='100%' height='768px'>
     <OrderReviewPdf/>
   </PDFViewer>
 );
