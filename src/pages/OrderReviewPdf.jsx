@@ -99,7 +99,7 @@ export const OrderReviewPdf = () => (
           return(
             <>
               <Text key={item.id}>
-                {idx+1} - {item.productName}
+                {idx+1} - {item.productName} -> ... $
               </Text>
             </>
           )
