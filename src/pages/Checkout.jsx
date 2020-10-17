@@ -123,7 +123,7 @@ export const Checkout = (data) => {
     let cartCheckbox = JSON.parse( localStorage.getItem('cart') )
     // let itemsCart = countItems(cartCheckbox)
 
-    // console.log(itemsCart)
+    console.log(totalPrice)
     return (
         <>
             <CheckoutGrid>

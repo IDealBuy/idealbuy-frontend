@@ -69,16 +69,17 @@ const Location = styled.div`
 
 // export const CardStoreOption = ({ total, stores, deliveryTime, location  }) => {
 export const CardStoreOption = ({ data, one, checkout }) => {
-    
+  
     let multiAmount = 0;
 
     if(!one){
         data.forEach(element => {
             multiAmount+= element.price
         });
-        
+        data.totalPrice = multiAmount
     }
   return (
+    
     <>
       <CardStoreOptionContainer>
         <CardStoreOptionInfo>
